@@ -1,7 +1,11 @@
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
-	return <div className="text-5xl text-green-700">hello</div>;
+	return (
+		<div className="bg-white shadow-2xl w-1/2 h-40 mx-auto mt-40 rounded-lg">
+			hello
+		</div>
+	);
 };
 
 export default Home;

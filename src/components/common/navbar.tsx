@@ -6,28 +6,38 @@ import { User } from "../../types/api";
 
 function Navbar() {
   const { logout, loggedIn } = useGoogleAuth();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isLBOpen, setIsLBOpen] = useState(false);
+  const [isDDOpen, setIsDDOpen] = useState(false);
   const { data } = useSWR<User>("/users/me", authFetcher);
 
   return (
     <div className="flex justify-between w-full h-12 mb-5 bg-cp-4">
-      <p>NKTimes</p>
+      <div className="flex">
+        <p className="px-2 m-2 text-2xl">NKTimes</p>
+        <button onClick={() => setIsDDOpen(!isDDOpen)}>
+          <div>O</div>
+        </button>
+      </div>
       <div>
         <button
           className="p-0 border-none outline-none cursor-pointer"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsLBOpen(!isLBOpen)}
           id="auth_element_user-login-trigger"
         >
-          <div className="w-20 h-10 bg-teal-400">{loggedIn ? data?.nickname : "Guest"}</div>
+          <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg">
+            {loggedIn ? data?.nickname : "Guest"}
+          </div>
         </button>
-        {isOpen && (
-          <>
+        {isLBOpen && (
+          <div className="justify-center w-48 rounded-md bg-cp-4">
             {loggedIn ? (
-              <div onClick={logout}>로그아웃</div>
+              <div onClick={logout} className="flex justify-center">
+                로그아웃
+              </div>
             ) : (
-              <div id="auth_element_user-login-google">a</div>
+              <div id="auth_element_user-login-google"></div>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>

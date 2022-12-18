@@ -3,6 +3,7 @@ import useGoogleAuth from "../../hooks/useGoogleAuth";
 import useSWR from "swr";
 import { authFetcher } from "../../utils/fetcher";
 import { User } from "../../types/api";
+import Link from "next/link";
 
 function Navbar() {
   const { logout, loggedIn } = useGoogleAuth();
@@ -13,7 +14,9 @@ function Navbar() {
   return (
     <div className="flex justify-between w-full h-12 mb-5 bg-cp-4">
       <div className="flex">
-        <p className="px-2 m-2 text-2xl">NKTimes</p>
+        <Link href="/">
+          <p className="px-2 m-2 text-2xl">NKTimes</p>
+        </Link>
         <button onClick={() => setIsDDOpen(!isDDOpen)}>
           <div>O</div>
         </button>

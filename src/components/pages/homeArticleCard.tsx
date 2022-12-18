@@ -16,16 +16,16 @@ function HomeArticleCard({ title, url, route }: Props) {
     authFetcher
   );
   return (
-    <div className="flex flex-col w-full h-64 mx-0 mb-4 rounded-xl bg-cp-1">
+    <div className="flex flex-col w-full h-64 mx-2 mb-4 rounded-xl bg-cp-1">
       <div className="w-full px-3 border-b-2 border-black h-1/6">
         <Link href={route}>
           <div className="flex justify-between align-bottom">
-            <p className="inline-block py-1 text-lg font-bold">{title}</p>
-            <p className="inline-block py-2 text-sm">더보기</p>
+            <p className="inline-block py-2 text-lg font-bold">{title}</p>
+            <p className="inline-block py-3 text-sm">더보기</p>
           </div>
         </Link>
       </div>
-      <ul className="h-full px-2 list-none">
+      <ul className="px-2 list-none h-5/6">
         {data?.content.map((data, index: number) => {
           return (
             <li

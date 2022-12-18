@@ -21,19 +21,23 @@ function HomeTalkingCard() {
           </div>
         </Link>
       </div>
-      <ul className="px-2 list-none h-5/6">
-        {data?.content.map((data, index: number) => {
-          return (
-            <li
-              key={index}
-              className="flex flex-row justify-between px-1 py-1 border-b-2 border-black last:border-0"
-            >
-              <p>{data.content}</p>
-              <p className="text-sm text-cp-5">{new Date(data.createdAt).toDateString()}</p>
-            </li>
-          );
-        })}
-      </ul>
+      {loggedIn ? (
+        <ul className="px-2 list-none h-5/6">
+          {data?.content.map((data, index: number) => {
+            return (
+              <li
+                key={index}
+                className="flex flex-row justify-between px-1 py-1 border-b-2 border-black last:border-0"
+              >
+                <p>{data.content}</p>
+                <p className="text-sm text-cp-5">{new Date(data.createdAt).toDateString()}</p>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div>로그인이 필요합니다</div>
+      )}
     </div>
   );
 }

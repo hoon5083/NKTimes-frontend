@@ -9,7 +9,7 @@ function Navbar() {
   const { logout, loggedIn } = useGoogleAuth();
   const [isLBOpen, setIsLBOpen] = useState(false);
   const [isDDOpen, setIsDDOpen] = useState(false);
-  const { data } = useSWR<User>("/users/me", authFetcher);
+  const { data } = useSWR<User>(loggedIn ? "/users/me" : null, authFetcher);
 
   return (
     <div className="flex justify-between w-full h-12 mb-5 bg-cp-4">

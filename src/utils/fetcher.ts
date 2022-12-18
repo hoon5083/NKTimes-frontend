@@ -7,5 +7,5 @@ export async function fetcher(url: string) {
 
 export async function authFetcher(url: string) {
   const config = getAuthHeader(document.cookie);
-  return (await serverAxios.get(`${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}${url}`, config)).data;
+  return (await serverAxios.get(`${process.env.NEXT_PUBLIC_ENDPOINT}${url}`, config)).data;
 }

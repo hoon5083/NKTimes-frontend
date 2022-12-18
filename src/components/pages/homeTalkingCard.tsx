@@ -3,10 +3,12 @@ import useSWR from "swr";
 import { authFetcher } from "../../utils/fetcher";
 import Link from "next/link";
 import { Article, PagedApiResponse, Talking } from "../../types/api";
+import useGoogleAuth from "../../hooks/useGoogleAuth";
 
 function HomeTalkingCard() {
+  const { loggedIn } = useGoogleAuth();
   const { data, mutate } = useSWR<PagedApiResponse<Talking>>(
-    `/talkings?pageNumber=1&pageSize=6`,
+    loggedIn ? `/talkings?pageNumber=1&pageSize=6` : null,
     authFetcher
   );
   return (

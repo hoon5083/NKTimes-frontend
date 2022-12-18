@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { authFetcher } from "../../utils/fetcher";
 import Link from "next/link";
 import { Article, PagedApiResponse } from "../../types/api";
+import useGoogleAuth from "../../hooks/useGoogleAuth";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   title: string;

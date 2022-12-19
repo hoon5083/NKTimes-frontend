@@ -34,7 +34,7 @@ export interface PopupDetails {
 
 export interface Author {
   id: number;
-  nickname: number;
+  nickname: string;
   authority: "관리자" | "졸업생" | "교사" | "학생회" | "신문부" | "방송반" | "재학생";
   grade: null | number;
   class: null | number;

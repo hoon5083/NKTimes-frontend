@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 // Server side rendering에서 backend에 요청을 보내는 axios
 // (getServersideProps, getStaticProps 등에서 사용)
 export const serverAxios = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
+  baseURL: process.env.NEXT_PUBLIC_ENDPOINT,
 });
 
 interface ErrorInfo {

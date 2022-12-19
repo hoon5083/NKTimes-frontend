@@ -1,4 +1,4 @@
-import { FormEvent, HTMLAttributes, useCallback } from "react";
+import { FormEvent, useCallback } from "react";
 import { getAuthHeader } from "../../../utils/auth";
 import { serverAxios } from "../../../utils/commonAxios";
 import useSWR from "swr";

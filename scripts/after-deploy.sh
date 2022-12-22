@@ -3,6 +3,6 @@ REPOSITORY=/home/ubuntu/build
 
 cd $REPOSITORY
 
-sudo /usr/bin/yarn
+sudo /usr/local/bin/yarn
 
-sudo /usr/bin/pm2 start next
+sudo /usr/local/bin/pm2 start next

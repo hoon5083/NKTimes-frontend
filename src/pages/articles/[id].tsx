@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import Comment from "../../components/pages/articles/comment";
+import CommentSection from "../../components/pages/articles/commentSection";
 import { ArticleDetails } from "../../types/api";
 import { authFetcher } from "../../utils/fetcher";
 
@@ -35,11 +35,7 @@ const ArticleDetail: NextPage = () => {
         <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
       </div>
 
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
+      <CommentSection articleId={Number(id)} />
     </div>
   );
 };

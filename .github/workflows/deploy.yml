@@ -44,7 +44,7 @@ jobs:
           yarn
           yarn build
       - name: zip file
-        run: zip -r nktimes-frontend.zip ./next ./scripts ./appspec.yml ./.env ./package.json
+        run: zip -r nktimes-frontend.zip ./.next ./scripts ./appspec.yml ./.env ./package.json
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1

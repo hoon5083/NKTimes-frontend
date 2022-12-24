@@ -1,0 +1,64 @@
+name: deploy
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [16.17.0]
+
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Check Yarn -v
+        run: yarn -v
+
+      - name: create env file
+        working-directory: ./
+        run: |
+          pwd
+          touch .env
+          echo GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} >> .env
+          echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env
+          echo NEXT_PUBLIC_APP_DOMAIN=${{ secrets.NEXT_PUBLIC_APP_DOMAIN }} >> .env
+          echo NEXT_PUBLIC_ENDPOINT=${{ secrets.NEXT_PUBLIC_ENDPOINT }} >> .env
+          echo NEXT_PUBLIC_LUNCH_KEY=${{ secrets.NEXT_PUBLIC_LUNCH_KEY }} >> .env
+          cat .env
+
+      - name: build server files
+        working-directory: ./
+        run: |
+          yarn
+          yarn build
+      - name: zip file
+        run: zip -r nktimes-frontend.zip ./.next ./scripts ./appspec.yml ./.env ./package.json
+
+      - name: AWS configure credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./nktimes-frontend.zip s3://nktimes-build/deploy/nktimes-frontend.zip
+
+      - name: deploy with AWS codeDeploy
+        run: aws deploy create-deployment
+          --application-name nktimes-deploy
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name frontend
+          --s3-location bucket=nktimes-build,bundleType=zip,key=deploy/nktimes-frontend.zip

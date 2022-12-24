@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <HomeArticleCard title="공지" url="/articles/1" route="/boards/1" />
         <HomeArticleCard title="기사" url="/articles/2" route="/boards/2" />
         <HomeArticleCard title="자유게시판" url="/articles/3" route="/boards/3" />
-        <HomeLunchCard />
+        {/* <HomeLunchCard /> */}
         <HomeTalkingCard />
         <HomeInfoCard />
       </div>

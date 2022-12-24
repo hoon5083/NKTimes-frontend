@@ -29,7 +29,7 @@ jobs:
         run: |
           pwd
           touch .env
-          echo GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} >> .env
+          echo NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} >> .env
           echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env
           echo NEXT_PUBLIC_APP_DOMAIN=${{ secrets.NEXT_PUBLIC_APP_DOMAIN }} >> .env
           echo NEXT_PUBLIC_ENDPOINT=${{ secrets.NEXT_PUBLIC_ENDPOINT }} >> .env

@@ -12,32 +12,35 @@ function TalkingInput() {
     loggedIn ? `/talkings?pageNumber=1&pageSize=6` : null,
     authFetcher
   );
-  const handleTalking = useCallback((e: FormEvent<HTMLFormElement>) => {
-    async function submitGroup() {
-      const form = e.currentTarget;
-      const formElements = form
-        ? (form.elements as typeof form.elements & {
-            content: HTMLInputElement;
-          })
-        : null;
-      if (formElements?.content.value.length == 0) {
-        alert("빈 글 입니다");
-        return;
-      }
+  const handleTalking = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      async function submitGroup() {
+        const form = e.currentTarget;
+        const formElements = form
+          ? (form.elements as typeof form.elements & {
+              content: HTMLInputElement;
+            })
+          : null;
+        if (formElements?.content.value.length == 0) {
+          alert("빈 글 입니다");
+          return;
+        }
 
-      const config = getAuthHeader(document.cookie);
-      try {
-        const body = {
-          content: formElements?.content.value,
-        };
-        await serverAxios.post(`/talkings`, body, config);
-      } catch (e) {
-        console.log(e);
+        const config = getAuthHeader(document.cookie);
+        try {
+          const body = {
+            content: formElements?.content.value,
+          };
+          await serverAxios.post(`/talkings`, body, config);
+        } catch (e) {
+          console.log(e);
+        }
+        mutate();
       }
-      mutate();
-    }
-    submitGroup();
-  }, []);
+      submitGroup();
+    },
+    [mutate]
+  );
   return (
     <form className="flex w-full mb-5" onSubmit={handleTalking}>
       <input

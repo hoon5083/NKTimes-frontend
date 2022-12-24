@@ -7,13 +7,13 @@ import { useState } from "react";
 import TalkingInput from "../components/pages/talkings/talkingInput";
 
 const Talkings: NextPage = () => {
-  const [pageCount, setPageCount] = useState(1);
+  const [pageIndex, setPageIndex] = useState(1);
   const { data, mutate } = useSWR<PagedApiResponse<Talking>>(
-    `/talkings?pageNumber=1&pageSize=${pageCount * 20}`,
+    `/talkings?pageNumber=${pageIndex}&pageSize=20`,
     authFetcher
   );
   return (
-    <div className="flex flex-col w-11/12 h-screen mx-auto justify-s">
+    <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-s">
       <div className="mx-auto my-10 text-6xl font-bold w-fit">담벼락</div>
       <TalkingInput />
       {data?.content.map((talking, index: number) => {
@@ -31,11 +31,18 @@ const Talkings: NextPage = () => {
           />
         );
       })}
-      {pageCount * 20 <= Number(data?.totalCount) ? (
-        <div className="" onClick={() => setPageCount(pageCount + 1)}>
-          더보기
-        </div>
-      ) : null}
+      <div className="flex flex-row justify-between">
+        {pageIndex <= Number(data?.totalPages) ? (
+          <div className="" onClick={() => setPageIndex(pageIndex + 1)}>
+            다음 페이지
+          </div>
+        ) : null}
+        {pageIndex > 1 ? (
+          <div className="" onClick={() => setPageIndex(pageIndex - 1)}>
+            이전 페이지
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };

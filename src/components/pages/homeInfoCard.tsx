@@ -11,7 +11,7 @@ function HomeInfoCard() {
           </div>
         </Link>
       </div>
-      <ul className="px-2 list-none h-5/6"></ul>
+      <ul className="px-2 list-none h-5/6">준비중</ul>
     </div>
   );
 }

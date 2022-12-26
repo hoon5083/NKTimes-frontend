@@ -13,7 +13,7 @@ const Talkings: NextPage = () => {
     authFetcher
   );
   return (
-    <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-s">
+    <div className="flex flex-col w-11/12 min-h-screen mx-auto">
       <div className="mx-auto my-10 text-6xl font-bold w-fit">담벼락</div>
       <TalkingInput />
       {data?.content.map((talking, index: number) => {

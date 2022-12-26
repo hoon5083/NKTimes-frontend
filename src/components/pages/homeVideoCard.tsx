@@ -15,7 +15,10 @@ function HomeVideoCard({ order }: Props) {
     `/articles/4?pageNumber=${order}&pageSize=1`,
     fetcher
   )?.data?.content[0].id;
-  const { data, mutate } = useSWRimmutable<ArticleDetails>(`/articles/4/${articleId}`, fetcher);
+  const { data } = useSWRimmutable<ArticleDetails>(
+    articleId ? `/articles/4/${articleId}` : null,
+    fetcher
+  );
   const videoId = data?.content.slice(3, -4);
   return (
     <div className="flex flex-col w-full h-64 mx-2 mb-4 rounded-xl bg-cp-1">

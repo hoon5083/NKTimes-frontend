@@ -1,16 +1,31 @@
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as voidHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import CommentSection from "../../../components/pages/articles/commentSection";
 import { ArticleDetails } from "../../../types/api";
+import { getAuthHeader } from "../../../utils/auth";
+import { serverAxios } from "../../../utils/commonAxios";
 import { authFetcher } from "../../../utils/fetcher";
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter();
   const { id, articleId } = router.query;
-  const { data } = useSWR<ArticleDetails>(`/articles/${id}/${articleId}`, authFetcher);
+  const { data, mutate } = useSWR<ArticleDetails>(`/articles/${id}/${articleId}`, authFetcher);
+
+  const createLike = async () => {
+    const config = getAuthHeader(document.cookie);
+    await serverAxios.post(`/articles/${id}/${articleId}/like`, {}, config);
+    mutate();
+  };
+
+  const deleteLike = async () => {
+    const config = getAuthHeader(document.cookie);
+    await serverAxios.delete(`/articles/${id}/${articleId}/like`, config);
+    mutate();
+  };
 
   return (
     <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
@@ -33,10 +48,17 @@ const ArticleDetail: NextPage = () => {
           className="mx-4"
         />
       </div>
-      <button className="flex justify-end">
-        <FontAwesomeIcon icon={faHeart} className="mt-1" />
-        <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
-      </button>
+      {!data?.isLiked ? (
+        <button className="flex justify-end" onClick={createLike}>
+          <FontAwesomeIcon icon={voidHeart} className="mt-1" />
+          <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
+        </button>
+      ) : (
+        <button className="flex justify-end" onClick={deleteLike}>
+          <FontAwesomeIcon icon={fullHeart} className="mt-1" />
+          <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
+        </button>
+      )}
 
       <CommentSection articleId={Number(articleId)} />
     </div>

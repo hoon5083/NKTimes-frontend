@@ -9,7 +9,10 @@ function HomeMainCard() {
     "/articles/2?pageNumber=1&pageSize=1",
     fetcher
   )?.data?.content[0].id;
-  const { data, mutate } = useSWRimmutable<ArticleDetails>(`/articles/2/${articleId}`, fetcher);
+  const { data } = useSWRimmutable<ArticleDetails>(
+    articleId ? `/articles/2/${articleId}` : null,
+    fetcher
+  );
   return (
     <Link href={`/articles/2/${articleId}`}>
       <div className="flex flex-col w-full h-[60vh] sm:col-span-1 md:col-span-2 row-span-2 mx-2 mb-4 rounded-xl bg-cp-1">

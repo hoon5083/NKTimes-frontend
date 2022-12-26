@@ -28,7 +28,7 @@ const ArticleDetail: NextPage = () => {
           </div>
         </div>
 
-        <div>{data?.content}</div>
+        <div dangerouslySetInnerHTML={{ __html: String(data?.content) }} className="mx-4" />
       </div>
       <div className="flex justify-end">
         <FontAwesomeIcon icon={faHeart} className="mt-1" />

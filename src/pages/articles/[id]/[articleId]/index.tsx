@@ -2,18 +2,21 @@ import { faHeart as voidHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import useSWR, { mutate } from "swr";
-import CommentSection from "../../../components/pages/articles/commentSection";
-import useGoogleAuth from "../../../hooks/useGoogleAuth";
-import { ArticleDetails } from "../../../types/api";
-import { getAuthHeader } from "../../../utils/auth";
-import { serverAxios } from "../../../utils/commonAxios";
-import { authFetcher } from "../../../utils/fetcher";
+import useSWR from "swr";
+import useSWRimmutable from "swr";
+import CommentSection from "../../../../components/pages/articles/commentSection";
+import useGoogleAuth from "../../../../hooks/useGoogleAuth";
+import { ArticleDetails, User } from "../../../../types/api";
+import { getAuthHeader } from "../../../../utils/auth";
+import { serverAxios } from "../../../../utils/commonAxios";
+import { authFetcher } from "../../../../utils/fetcher";
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter();
   const { id, articleId } = router.query;
+  const user = useSWRimmutable<User>(`/users/me`, authFetcher).data;
   const { data, mutate } = useSWR<ArticleDetails>(`/articles/${id}/${articleId}`, authFetcher);
   const { loggedIn } = useGoogleAuth();
 
@@ -50,24 +53,33 @@ const ArticleDetail: NextPage = () => {
           className="mx-4"
         />
       </div>
-      {loggedIn ? (
-        !data?.isLiked ? (
-          <button className="flex justify-end" onClick={createLike}>
-            <FontAwesomeIcon icon={voidHeart} className="mt-1" />
-            <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
-          </button>
+      <div className="flex justify-between w-11/12 mx-auto justify-self-center">
+        {/* {user?.id === data?.author.id ? (
+          <Link href={`${router.asPath}/edit`}>
+            <button className="w-1/12 h-8 text-sm rounded-lg bg-cp-4">수정하기</button>
+          </Link>
+        ) : ( */}
+        <div></div>
+        {/* )} */}
+        {loggedIn ? (
+          !data?.isLiked ? (
+            <button onClick={createLike} className="flex justify-center">
+              <FontAwesomeIcon icon={voidHeart} className="mt-1" />
+              <div className="px-2 mb-2">{data?.likeCount}</div>
+            </button>
+          ) : (
+            <button onClick={deleteLike} className="flex justify-center">
+              <FontAwesomeIcon icon={fullHeart} className="mt-1" />
+              <div className="px-2 mb-2">{data?.likeCount}</div>
+            </button>
+          )
         ) : (
-          <button className="flex justify-end" onClick={deleteLike}>
+          <div className="flex justify-center">
             <FontAwesomeIcon icon={fullHeart} className="mt-1" />
-            <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
-          </button>
-        )
-      ) : (
-        <div className="flex justify-end">
-          <FontAwesomeIcon icon={fullHeart} className="mt-1" />
-          <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
-        </div>
-      )}
+            <div className="px-2 mb-2">{data?.likeCount}</div>
+          </div>
+        )}
+      </div>
       <CommentSection articleId={Number(articleId)} />
     </div>
   );

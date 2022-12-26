@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { Router } from "react-router-dom";
 import ArticleInputSection from "../../../components/pages/articles/articleInputSection";
 
 const ArticleWrite: NextPage = () => {

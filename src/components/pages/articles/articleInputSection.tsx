@@ -6,15 +6,10 @@ import { getAuthHeader } from "../../../utils/auth";
 import { serverAxios } from "../../../utils/commonAxios";
 import ArticleInput from "./articleInput";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
-  boardId: number;
-}
-
-function ArticleInputSection({ boardId }: Props) {
+function ArticleInputSection() {
   const { loggedIn } = useGoogleAuth();
   const [content, setContent] = useState("");
   const router = useRouter();
-
   const modules = {
     toolbar: {
       // container에 등록되는 순서대로 tool 배치
@@ -76,15 +71,15 @@ function ArticleInputSection({ boardId }: Props) {
             content: content,
             title: formElements?.title.value,
           };
-          const res = await serverAxios.post(`/articles/${boardId}`, body, config);
-          router.replace(`/articles/${res.data.id}`);
+          const res = await serverAxios.post(`/articles/${router.query.id}`, body, config);
+          router.replace(`/articles/${router.query.id}/${res.data.id}`);
         } catch (e) {
           console.log(e);
         }
       }
       submitGroup();
     },
-    [loggedIn, boardId, content, router]
+    [loggedIn, content, router]
   );
   return (
     <div>

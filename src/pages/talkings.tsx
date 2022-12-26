@@ -7,9 +7,9 @@ import { useState } from "react";
 import TalkingInput from "../components/pages/talkings/talkingInput";
 
 const Talkings: NextPage = () => {
-  const [pageIndex, setPageIndex] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
   const { data, mutate } = useSWR<PagedApiResponse<Talking>>(
-    `/talkings?pageNumber=${pageIndex}&pageSize=20`,
+    `/talkings?pageNumber=1&pageSize=${pageCount * 20}`,
     authFetcher
   );
   return (
@@ -31,18 +31,11 @@ const Talkings: NextPage = () => {
           />
         );
       })}
-      <div className="flex flex-row justify-between">
-        {pageIndex <= Number(data?.totalPages) ? (
-          <div className="" onClick={() => setPageIndex(pageIndex + 1)}>
-            다음 페이지
-          </div>
-        ) : null}
-        {pageIndex > 1 ? (
-          <div className="" onClick={() => setPageIndex(pageIndex - 1)}>
-            이전 페이지
-          </div>
-        ) : null}
-      </div>
+      {pageCount * 20 <= Number(data?.totalCount) ? (
+        <div className="" onClick={() => setPageCount(pageCount + 1)}>
+          더보기
+        </div>
+      ) : null}
     </div>
   );
 };

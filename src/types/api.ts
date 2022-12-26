@@ -61,6 +61,7 @@ export interface Board {
   title: string;
   isApproved: boolean;
   introduction: null | string;
+  whitelist: string[];
 }
 
 export interface BoardDetails extends Board {

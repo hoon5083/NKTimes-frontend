@@ -8,7 +8,7 @@ function HomeMainCard() {
   const articleId = useSWRimmutable<PagedApiResponse<Article>>(
     "/articles/2?pageNumber=1&pageSize=1",
     fetcher
-  )?.data?.content[0].id;
+  )?.data?.content[0]?.id;
   const { data } = useSWRimmutable<ArticleDetails>(
     articleId ? `/articles/2/${articleId}` : null,
     fetcher

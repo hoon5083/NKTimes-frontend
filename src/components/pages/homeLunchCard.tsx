@@ -3,8 +3,11 @@ import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
 
 function HomeLunchCard() {
-  const dates = new Date().toLocaleDateString().split(". ");
-  const date = dates[0] + dates[1] + dates[2].replace(".", "");
+  const today = new Date();
+  const date =
+    String(today.getFullYear()) +
+    String(today.getMonth()) +
+    (String(today.getDay()).length === 1 ? "0" + String(today.getDay()) : String(today.getDay()));
   const { data, mutate } = useSWR(
     `https://open.neis.go.kr/hub/mealServiceDietInfo?key=1566a46db98642c29341cfa5206bd3b4&type=json&pIndex=1&pSize=1&MLSV_YMD=${date}&SD_SCHUL_CODE=7010136&ATPT_OFCDC_SC_CODE=B10`,
     fetcher

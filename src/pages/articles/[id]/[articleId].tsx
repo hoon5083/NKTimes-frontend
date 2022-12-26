@@ -10,6 +10,7 @@ import { ArticleDetails } from "../../../types/api";
 import { getAuthHeader } from "../../../utils/auth";
 import { serverAxios } from "../../../utils/commonAxios";
 import { authFetcher } from "../../../utils/fetcher";
+import YouTube from "react-youtube";
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter();
@@ -29,6 +30,8 @@ const ArticleDetail: NextPage = () => {
     mutate();
   };
 
+  const videoId = data?.content.slice(3, -4);
+
   return (
     <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
       <div className="mb-20">
@@ -45,10 +48,25 @@ const ArticleDetail: NextPage = () => {
           </div>
         </div>
 
-        <div
-          dangerouslySetInnerHTML={{ __html: String(data?.content || "loading") }}
-          className="mx-4"
-        />
+        {Number(router.query.id) !== 4 ? (
+          <div
+            dangerouslySetInnerHTML={{ __html: String(data?.content || "loading") }}
+            className="mx-4"
+          />
+        ) : (
+          <YouTube
+            videoId={videoId}
+            opts={{
+              width: "560",
+              height: "315",
+              playerVars: {
+                autoplay: 0,
+                rel: 0,
+                modestbranding: 1,
+              },
+            }}
+          />
+        )}
       </div>
       {loggedIn ? (
         !data?.isLiked ? (

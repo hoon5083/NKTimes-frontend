@@ -26,6 +26,7 @@ function CommentSection({ articleId }: Props) {
             return (
               <CommentCard
                 key={index}
+                commentId={comment.id}
                 author={comment.author}
                 date={new Date(comment.createdAt)}
                 content={comment.content}

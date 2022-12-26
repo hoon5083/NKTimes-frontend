@@ -11,7 +11,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 function CommentInput({ mutate, articleId }: Props) {
-  const { loggedIn } = useGoogleAuth();
   const handleComment = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       async function submitGroup() {
@@ -45,7 +44,7 @@ function CommentInput({ mutate, articleId }: Props) {
     <form className="flex w-full mb-5" onSubmit={handleComment}>
       <input
         className="w-5/6 h-20 p-2 mr-3 rounded-lg"
-        placeholder="20자 이내로 남겨주세요"
+        placeholder="댓글을 남겨주세요"
         name="content"
       />
       <button className="w-1/6 h-20 rounded-lg bg-cp-4" type="submit">

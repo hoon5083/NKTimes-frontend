@@ -5,6 +5,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   author: Author;
   date: Date;
   content: string;
+  commentId: number;
 }
 
 function CommentCard({ author, date, content }: Props) {

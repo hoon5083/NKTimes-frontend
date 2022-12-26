@@ -38,7 +38,7 @@ const ArticleDetail: NextPage = () => {
         <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
       </button>
 
-      <CommentSection articleId={Number(id)} />
+      <CommentSection articleId={Number(articleId)} />
     </div>
   );
 };

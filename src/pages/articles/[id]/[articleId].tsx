@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import useSWR, { mutate } from "swr";
 import CommentSection from "../../../components/pages/articles/commentSection";
+import useGoogleAuth from "../../../hooks/useGoogleAuth";
 import { ArticleDetails } from "../../../types/api";
 import { getAuthHeader } from "../../../utils/auth";
 import { serverAxios } from "../../../utils/commonAxios";
@@ -14,6 +15,7 @@ const ArticleDetail: NextPage = () => {
   const router = useRouter();
   const { id, articleId } = router.query;
   const { data, mutate } = useSWR<ArticleDetails>(`/articles/${id}/${articleId}`, authFetcher);
+  const { loggedIn } = useGoogleAuth();
 
   const createLike = async () => {
     const config = getAuthHeader(document.cookie);
@@ -48,18 +50,24 @@ const ArticleDetail: NextPage = () => {
           className="mx-4"
         />
       </div>
-      {!data?.isLiked ? (
-        <button className="flex justify-end" onClick={createLike}>
-          <FontAwesomeIcon icon={voidHeart} className="mt-1" />
-          <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
-        </button>
+      {loggedIn ? (
+        !data?.isLiked ? (
+          <button className="flex justify-end" onClick={createLike}>
+            <FontAwesomeIcon icon={voidHeart} className="mt-1" />
+            <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
+          </button>
+        ) : (
+          <button className="flex justify-end" onClick={deleteLike}>
+            <FontAwesomeIcon icon={fullHeart} className="mt-1" />
+            <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
+          </button>
+        )
       ) : (
-        <button className="flex justify-end" onClick={deleteLike}>
+        <div className="flex justify-end">
           <FontAwesomeIcon icon={fullHeart} className="mt-1" />
           <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
-        </button>
+        </div>
       )}
-
       <CommentSection articleId={Number(articleId)} />
     </div>
   );

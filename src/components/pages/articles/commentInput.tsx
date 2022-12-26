@@ -1,19 +1,19 @@
-import { FormEvent, useCallback } from "react";
+import { FormEvent, HTMLAttributes, useCallback } from "react";
 import { getAuthHeader } from "../../../utils/auth";
 import { serverAxios } from "../../../utils/commonAxios";
-import useSWR from "swr";
-import { PagedApiResponse, Talking } from "../../../types/api";
+import { KeyedMutator } from "swr";
+import { Comment, PagedApiResponse, Talking } from "../../../types/api";
 import useGoogleAuth from "../../../hooks/useGoogleAuth";
-import { authFetcher } from "../../../utils/fetcher";
 
-function TalkingInput() {
-  const { loggedIn } = useGoogleAuth();
-  const { mutate } = useSWR<PagedApiResponse<Talking>>(
-    loggedIn ? `/talkings?pageNumber=1&pageSize=6` : null,
-    authFetcher
-  );
-  const handleTalking = useCallback(
+interface Props extends HTMLAttributes<HTMLDivElement> {
+  mutate: KeyedMutator<PagedApiResponse<Comment>>;
+  articleId: number;
+}
+
+function CommentInput({ mutate, articleId }: Props) {
+  const handleComment = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
       async function submitGroup() {
         const form = e.currentTarget;
         const formElements = form
@@ -22,7 +22,7 @@ function TalkingInput() {
             })
           : null;
         if (formElements?.content.value.length == 0) {
-          alert("빈 글 입니다");
+          alert("빈 댓글 입니다");
           return;
         }
 
@@ -31,7 +31,7 @@ function TalkingInput() {
           const body = {
             content: formElements?.content.value,
           };
-          await serverAxios.post(`/talkings`, body, config);
+          await serverAxios.post(`/comments?articleId=${articleId}`, body, config);
         } catch (e) {
           console.log(e);
         }
@@ -39,13 +39,13 @@ function TalkingInput() {
       }
       submitGroup();
     },
-    [mutate]
+    [mutate, articleId]
   );
   return (
-    <form className="flex w-full mb-5" onSubmit={handleTalking}>
+    <form className="flex w-full mb-5" onSubmit={handleComment}>
       <input
         className="w-5/6 h-20 p-2 mr-3 rounded-lg"
-        placeholder="20자 이내로 남겨주세요"
+        placeholder="댓글을 남겨주세요"
         name="content"
       />
       <button className="w-1/6 h-20 rounded-lg bg-cp-4" type="submit">
@@ -55,4 +55,4 @@ function TalkingInput() {
   );
 }
 
-export default TalkingInput;
+export default CommentInput;

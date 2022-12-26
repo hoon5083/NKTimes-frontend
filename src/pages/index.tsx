@@ -13,9 +13,9 @@ const Home: NextPage = () => {
         <HomeMainCard />
         <HomeVideoCard order={1} />
         <HomeVideoCard order={2} />
-        <HomeArticleCard title="공지" url="/articles/1" route="/boards/1" />
-        <HomeArticleCard title="기사" url="/articles/2" route="/boards/2" />
-        <HomeArticleCard title="자유게시판" url="/articles/3" route="/boards/3" />
+        <HomeArticleCard title="공지" url="/articles/1" route="/articles/1" />
+        <HomeArticleCard title="기사" url="/articles/2" route="/articles/2" />
+        <HomeArticleCard title="자유게시판" url="/articles/3" route="/articles/3" />
         {/* <HomeLunchCard /> */}
         <HomeTalkingCard />
         <HomeInfoCard />

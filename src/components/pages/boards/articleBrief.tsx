@@ -6,10 +6,11 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   article: Article;
+  boardId: number;
 }
 
-function ArticleBrief({ article }: Props) {
-  const url = "/articles/" + String(article.id);
+function ArticleBrief({ article, boardId }: Props) {
+  const url = "/articles/" + String(boardId) + "/" + String(article.id);
   return (
     <Link href={url}>
       <div className="w-11/12 h-32 p-4 mx-auto my-2 rounded-lg bg-cp-1">

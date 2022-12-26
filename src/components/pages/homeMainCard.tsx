@@ -1,20 +1,27 @@
-import { HTMLAttributes } from "react";
 import useSWR from "swr";
-import { authFetcher } from "../../utils/fetcher";
+import useSWRimmutable from "swr";
+import { fetcher } from "../../utils/fetcher";
 import Link from "next/link";
-import { Article, PagedApiResponse } from "../../types/api";
+import { Article, ArticleDetails, PagedApiResponse } from "../../types/api";
 
 function HomeMainCard() {
-  const { data, mutate } = useSWR<PagedApiResponse<Article>>(`/articles/2/1`, authFetcher);
+  const articleId = useSWR<PagedApiResponse<Article>>(
+    "/articles/2?pageNumber=1&pageSize=1",
+    fetcher
+  )?.data?.content[0].id;
+  const { data, mutate } = useSWRimmutable<ArticleDetails>(`/articles/2/${articleId}`, fetcher);
   return (
-    <Link href="/articles/1">
+    <Link href={`/articles/2/${articleId}`}>
       <div className="flex flex-col w-full h-[60vh] sm:col-span-1 md:col-span-2 row-span-2 mx-2 mb-4 rounded-xl bg-cp-1">
-        <div></div>
+        <div className="flex justify-center">
+          <div className="mt-2 text-2xl font-bold">{data?.title}</div>
+        </div>
         <div className="w-full h-full p-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod vitae arcu at
-          elementum. Donec nec placerat orci. Donec ut pharetra justo, eget ultricies urna. Sed nec
-          convallis eros. Mauris in molestie est. Nunc dolor tortor, ornare in semper quis, pharetra
-          sed est. Maecenas elementum purus sed enim faucibus, eget sodales felis ultrices.
+          <div
+            dangerouslySetInnerHTML={{
+              __html: String(data?.content),
+            }}
+          />
         </div>
       </div>
     </Link>

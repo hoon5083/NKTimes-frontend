@@ -9,7 +9,7 @@ function BoardDropdown() {
     <div className="absolute grid w-screen grid-cols-4 p-10 h-fit bg-cp-5 top-12">
       {data?.content.map((board, index: number) => {
         return (
-          <Link key={index} href={"/boards/" + board.id}>
+          <Link key={index} href={"/articles/" + board.id}>
             <div>{board.title}</div>
           </Link>
         );

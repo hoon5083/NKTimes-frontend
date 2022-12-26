@@ -8,7 +8,7 @@ const ArticleWrite: NextPage = () => {
       <div className="mb-20">
         <div className="mx-auto my-10 text-4xl font-bold w-fit">글쓰기</div>
         <div className="flex mx-4 my-8"></div>
-        <ArticleInputSection boardId={1} />
+        <ArticleInputSection />
       </div>
     </div>
   );

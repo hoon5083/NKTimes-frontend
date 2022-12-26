@@ -3,14 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import CommentSection from "../../components/pages/articles/commentSection";
-import { ArticleDetails } from "../../types/api";
-import { authFetcher } from "../../utils/fetcher";
+import CommentSection from "../../../components/pages/articles/commentSection";
+import { ArticleDetails } from "../../../types/api";
+import { authFetcher } from "../../../utils/fetcher";
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter();
-  const { id } = router.query;
-  const { data } = useSWR<ArticleDetails>(`/articles/1/${id}`, authFetcher);
+  const { id, articleId } = router.query;
+  const { data } = useSWR<ArticleDetails>(`/articles/${id}/${articleId}`, authFetcher);
 
   return (
     <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
@@ -33,10 +33,10 @@ const ArticleDetail: NextPage = () => {
           className="mx-4"
         />
       </div>
-      <div className="flex justify-end">
+      <button className="flex justify-end">
         <FontAwesomeIcon icon={faHeart} className="mt-1" />
         <div className="flex justify-end px-2 mb-2">{data?.likeCount}</div>
-      </div>
+      </button>
 
       <CommentSection articleId={Number(id)} />
     </div>

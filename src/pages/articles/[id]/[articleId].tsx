@@ -35,9 +35,9 @@ const ArticleDetail: NextPage = () => {
           <div className="flex justify-between w-full my-4">
             <div>{data ? new Date(data.updatedAt).toLocaleString() : null}</div>
             <div className="flex justify-end w-1/3">
-              <div className="flex justify-between w-1/2 ml-2">
-                <div>{data?.author.authority}</div>
-                <div>{data?.author.nickname}</div>
+              <div className="flex justify-between gap-2 ml-2 w-fit">
+                <div className="w-fit">{data?.author.authority}</div>
+                <div className="w-fit">{data?.author.nickname}</div>
               </div>
             </div>
           </div>

@@ -2,11 +2,13 @@ import { HTMLAttributes } from "react";
 import useSWR from "swr";
 import { authFetcher } from "../../utils/fetcher";
 import Link from "next/link";
-import { Article, PagedApiResponse, Talking } from "../../types/api";
+import { Article, PagedApiResponse, Talking, User } from "../../types/api";
 import useGoogleAuth from "../../hooks/useGoogleAuth";
+import useSWRimmutable from "swr";
 
 function HomeTalkingCard() {
   const { loggedIn } = useGoogleAuth();
+  const user = useSWRimmutable<User>(loggedIn ? "/users/me" : null, authFetcher).data;
   const { data, mutate } = useSWR<PagedApiResponse<Talking>>(
     loggedIn ? `/talkings?pageNumber=1&pageSize=6` : null,
     authFetcher
@@ -14,12 +16,19 @@ function HomeTalkingCard() {
   return (
     <div className="flex flex-col w-full h-64 mx-2 mb-4 rounded-xl bg-cp-1">
       <div className="w-full px-3 border-b-2 border-black h-1/6">
-        <Link href="/talkings?pageNumber=1&pageSize=6">
+        {user?.isApproved ? (
+          <Link href="/talkings">
+            <div className="flex justify-between align-bottom">
+              <p className="inline-block py-2 text-lg font-bold">담벼락</p>
+              <p className="inline-block py-3 text-sm">더보기</p>
+            </div>
+          </Link>
+        ) : (
           <div className="flex justify-between align-bottom">
             <p className="inline-block py-2 text-lg font-bold">담벼락</p>
-            <p className="inline-block py-3 text-sm">더보기</p>
+            <p className="inline-block py-3 text-sm"></p>
           </div>
-        </Link>
+        )}
       </div>
       {loggedIn ? (
         <ul className="px-2 list-none h-5/6">

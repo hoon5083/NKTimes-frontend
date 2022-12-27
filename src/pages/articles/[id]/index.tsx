@@ -27,9 +27,11 @@ const ArticleList: NextPage = () => {
       <div className="mx-auto my-10 text-xl font-medium w-fit">{board?.introduction}</div>
       {board?.whitelist.includes(String(user?.authority)) ? (
         <div className="flex justify-end w-11/12 mx-auto">
-          <Link href={`/articles/${id}/write`}>
-            <button className="w-1/12 h-8 text-white rounded-lg bg-cp-5">글쓰기</button>
-          </Link>
+          {user?.isApproved ? (
+            <Link href={`/articles/${id}/write`}>
+              <button className="w-1/12 h-8 text-white rounded-lg bg-cp-5">글쓰기</button>
+            </Link>
+          ) : null}
         </div>
       ) : null}
       {data?.content && data?.content.length > 0 ? (

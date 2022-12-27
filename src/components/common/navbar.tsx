@@ -7,8 +7,10 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList } from "@fortawesome/free-solid-svg-icons";
 import BoardDropdown from "./boardDropdown";
+import { useRouter } from "next/router";
 
 function Navbar() {
+  const router = useRouter();
   const { logout, loggedIn } = useGoogleAuth();
   const [isLBOpen, setIsLBOpen] = useState(false);
   const [isDDOpen, setIsDDOpen] = useState(false);
@@ -26,15 +28,27 @@ function Navbar() {
           </button>
         </div>
         <div>
-          <button
-            className="p-0 border-none outline-none cursor-pointer"
-            onClick={() => setIsLBOpen(!isLBOpen)}
-            id="auth_element_user-login-trigger"
-          >
-            <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg">
-              {loggedIn ? data?.nickname : "Guest"}
-            </div>
-          </button>
+          {!loggedIn || data ? (
+            <button
+              className="p-0 border-none outline-none cursor-pointer"
+              onClick={() => setIsLBOpen(!isLBOpen)}
+              id="auth_element_user-login-trigger"
+            >
+              <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg">
+                {loggedIn ? data?.nickname : "Guest"}
+              </div>
+            </button>
+          ) : (
+            <button
+              className="p-0 border-none outline-none cursor-pointer"
+              onClick={() => {
+                logout();
+                router.replace("/");
+              }}
+            >
+              <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg">로그아웃</div>
+            </button>
+          )}
           {isLBOpen && (
             <div className="justify-center w-48 rounded-md">
               {loggedIn ? (

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { BaseSyntheticEvent, ChangeEvent, FormEvent, useCallback, useState } from "react";
+import { BaseSyntheticEvent, FormEvent, useCallback, useState } from "react";
 import { getAuthHeader } from "../utils/auth";
 import { serverAxios } from "../utils/commonAxios";
 
@@ -21,44 +21,42 @@ const Register: NextPage = () => {
     }
   };
 
-  const handleSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      async function submitGroup() {
-        const form = e.currentTarget;
-        const formElements = form
-          ? (form.elements as typeof form.elements & {
-              nickname: HTMLInputElement;
-              name: HTMLInputElement;
-              pNumber: HTMLInputElement;
-              authority: HTMLInputElement;
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    async function submitGroup() {
+      const form = e.currentTarget;
+      const formElements = form
+        ? (form.elements as typeof form.elements & {
+            nickname: HTMLInputElement;
+            name: HTMLInputElement;
+            pNumber: HTMLInputElement;
+            authority: HTMLInputElement;
 
-              grade?: HTMLInputElement;
-              class?: HTMLInputElement;
-              number?: HTMLInputElement;
-            })
-          : null;
-        const config = getAuthHeader(document.cookie);
-        try {
-          const body = {
-            nickname: formElements?.nickname.value,
-            name: formElements?.name.value,
-            phone: formElements?.pNumber.value,
-            authority: formElements?.authority.value,
-            grade: formElements?.grade?.value,
-            class: formElements?.class?.value,
-            number: formElements?.number?.value,
-          };
-          await serverAxios.post(`/users`, body, config);
-        } catch (e) {
-          console.log(e);
-        }
+            grade?: HTMLInputElement;
+            class?: HTMLInputElement;
+            number?: HTMLInputElement;
+          })
+        : null;
+      const config = getAuthHeader(document.cookie);
+      try {
+        const body = {
+          nickname: formElements?.nickname.value,
+          name: formElements?.name.value,
+          phone: formElements?.pNumber.value,
+          authority: formElements?.authority.value,
+          grade: formElements?.grade?.value,
+          class: formElements?.class?.value,
+          number: formElements?.number?.value,
+        };
+        const res = await serverAxios.post(`/users`, body, config);
+        alert("환영합니다! 관리자의 승인을 기다려주세요 :)");
+        router.replace("/");
+      } catch (e) {
+        console.log(e);
       }
-      submitGroup();
-      router.replace("/");
-      alert("환영합니다! 관리자의 승인을 기다려주세요 :)");
-    },
-    [router]
-  );
+    }
+    submitGroup();
+  };
   return (
     <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
       <div className="mx-auto my-10 text-6xl font-bold w-fit">환영합니다</div>

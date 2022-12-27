@@ -201,7 +201,11 @@ class MyDocument extends Document {
                   if (response.status === 200) {
                     window.location.reload();
                   } else if (response.status === 401) {
-                    window.location = "/register";
+                    if(user.message.includes("Not Registered")) {
+                      window.location = "/register";
+                    } else {
+                      alert("세션 만료됨");
+                    }
                   } else {
                     alert("서버와의 통신이 원활하지 않습니다.");
                   }

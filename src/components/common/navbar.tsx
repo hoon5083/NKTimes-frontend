@@ -48,7 +48,13 @@ function Navbar() {
           )}
         </div>
       </div>
-      {isDDOpen ? <BoardDropdown /> : null}
+      {isDDOpen ? (
+        <BoardDropdown
+          setDD={() => {
+            setIsDDOpen(false);
+          }}
+        />
+      ) : null}
     </>
   );
 }

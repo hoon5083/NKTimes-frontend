@@ -14,7 +14,7 @@ function HomeVideoCard({ order }: Props) {
   const articleId = useSWR<PagedApiResponse<Article>>(
     `/articles/4?pageNumber=${order}&pageSize=1`,
     fetcher
-  )?.data?.content[0].id;
+  )?.data?.content[0]?.id;
   const { data } = useSWRimmutable<ArticleDetails>(
     articleId ? `/articles/4/${articleId}` : null,
     fetcher

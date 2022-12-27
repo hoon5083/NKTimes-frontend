@@ -5,10 +5,10 @@ import Link from "next/link";
 import { Article, ArticleDetails, PagedApiResponse } from "../../types/api";
 
 function HomeMainCard() {
-  const articleId = useSWR<PagedApiResponse<Article>>(
+  const articleId = useSWRimmutable<PagedApiResponse<Article>>(
     "/articles/2?pageNumber=1&pageSize=1",
     fetcher
-  )?.data?.content[0].id;
+  )?.data?.content[0]?.id;
   const { data } = useSWRimmutable<ArticleDetails>(
     articleId ? `/articles/2/${articleId}` : null,
     fetcher

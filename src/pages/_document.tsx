@@ -201,12 +201,7 @@ class MyDocument extends Document {
                   if (response.status === 200) {
                     window.location.reload();
                   } else if (response.status === 401) {
-                    if (user.message.includes("There's no user with email")) {
-                      //수정 필요
-                      window.location = "/register";
-                    } else {
-                      alert("세션이 만료되었습니다.");
-                    }
+                    window.location = "/register";
                   } else {
                     alert("서버와의 통신이 원활하지 않습니다.");
                   }

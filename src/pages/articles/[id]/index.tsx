@@ -15,12 +15,19 @@ const ArticleList: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [pageIndex, setPageIndex] = useState(1);
-  const board = useSWRImmutable<Board>(`/boards/${id}`, authFetcher).data;
+  const { board, error } = {
+    board: useSWRImmutable<Board>(`/boards/${id}`, authFetcher).data,
+    error: useSWRImmutable<Board>(`/boards/${id}`, authFetcher).error,
+  };
+  if (error) {
+    router.replace("/404");
+  }
   const user = useSWRImmutable<User>(`/users/me`, authFetcher).data;
   const { data } = useSWR<PagedApiResponse<Article>>(
     `/articles/${id}?pageSize=${ARTICLES_PAGE_SIZE}&pageNumber=${pageIndex}`,
     authFetcher
   );
+
   return (
     <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
       <div className="mx-auto my-10 text-6xl font-bold w-fit">{board?.title}</div>

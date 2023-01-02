@@ -27,39 +27,46 @@ function Navbar() {
             <FontAwesomeIcon icon={faList} />
           </button>
         </div>
-        <div>
-          {!loggedIn || data ? (
-            <button
-              className="p-0 border-none outline-none cursor-pointer"
-              onClick={() => setIsLBOpen(!isLBOpen)}
-              id="auth_element_user-login-trigger"
-            >
-              <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg">
-                {loggedIn ? data?.nickname : "Guest"}
-              </div>
-            </button>
-          ) : (
-            <button
-              className="p-0 border-none outline-none cursor-pointer"
-              onClick={() => {
-                logout();
-                router.replace("/");
-              }}
-            >
-              <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg">로그아웃</div>
-            </button>
-          )}
-          {isLBOpen && (
-            <div className="justify-center w-48 rounded-md">
-              {loggedIn ? (
-                <div onClick={logout} className="flex justify-center">
-                  로그아웃
+        <div className="flex">
+          {data?.isApproved ? (
+            <Link href="/board">
+              <div className="z-50 h-12 p-3 bg-transparent rounded-lg w-fit">게시판 신청</div>
+            </Link>
+          ) : null}
+          <div>
+            {!loggedIn || data ? (
+              <button
+                className="p-0 border-none outline-none cursor-pointer"
+                onClick={() => setIsLBOpen(!isLBOpen)}
+                id="auth_element_user-login-trigger"
+              >
+                <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg">
+                  {loggedIn ? data?.nickname : "Guest"}
                 </div>
-              ) : (
-                <div id="auth_element_user-login-google"></div>
-              )}
-            </div>
-          )}
+              </button>
+            ) : (
+              <button
+                className="p-0 border-none outline-none cursor-pointer"
+                onClick={() => {
+                  logout();
+                  router.replace("/");
+                }}
+              >
+                <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg">로그아웃</div>
+              </button>
+            )}
+            {isLBOpen && (
+              <div className="justify-center w-48 rounded-md">
+                {loggedIn ? (
+                  <div onClick={logout} className="flex justify-center">
+                    로그아웃
+                  </div>
+                ) : (
+                  <div id="auth_element_user-login-google"></div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
       {isDDOpen ? (

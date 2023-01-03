@@ -8,6 +8,7 @@ class MyDocument extends Document {
         <Head>
           <link href="/favicon.ico" rel="shortcut icon" />
           <script src="https://accounts.google.com/gsi/client" async defer></script>
+          <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         </Head>
         <body>
           <Main />

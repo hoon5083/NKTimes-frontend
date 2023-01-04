@@ -11,11 +11,12 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 function BoardDropdown({ setDD }: Props) {
   const { data } = useSWR<PagedApiResponse<Board>>(`/boards?pageNumber=1&pageSize=50`, authFetcher);
   return (
-    <div className="absolute grid w-screen grid-cols-4 p-10 h-fit bg-cp-5 top-12">
+    <div className="absolute grid w-screen grid-cols-4 p-10 h-fit bg-cp-4 top-12">
       {data?.content.map((board, index: number) => {
         return (
           <Link key={index} href={"/articles/" + board.id}>
             <button
+              className="hover:font-bold"
               onClick={() => {
                 setDD(false);
               }}

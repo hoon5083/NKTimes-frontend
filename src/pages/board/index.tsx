@@ -38,8 +38,8 @@ const AddBoard: NextPage = () => {
   };
   return (
     <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
-      <div className="mx-auto my-10 text-6xl font-bold w-fit">게시판 신청하기</div>
-      <div className="mx-auto my-10 text-xl font-medium w-fit">
+      <div className="mx-auto my-10 text-4xl font-bold sm:text-6xl w-fit">게시판 신청하기</div>
+      <div className="mx-auto my-10 text-lg font-medium sm:text-xl w-fit">
         게시판을 신청하기 위해 정보를 입력해주세요
       </div>
       <form onSubmit={handleSubmit}>
@@ -48,7 +48,14 @@ const AddBoard: NextPage = () => {
           <input name="title" className="w-1/2 h-8 p-1 mb-4 rounded-lg" />
           <div>게시판 소개를 입력해주세요</div>
           <input name="introduction" className="h-16 p-1 rounded-lg" />
-          <input type="submit" className="my-10"></input>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="p-1 px-2 my-10 text-white rounded-lg bg-cp-5 w-fit hover:shadow-xl"
+            >
+              신청하기
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -6,18 +6,25 @@ import { serverAxios } from "../utils/commonAxios";
 
 const Register: NextPage = () => {
   const [isStudent, setIsStudent] = useState(false);
+  const [isGraduate, setIsGraduate] = useState(false);
   const router = useRouter();
 
   const handleAuthority = (e: BaseSyntheticEvent) => {
     e.preventDefault();
     if (
       e.target.value === "재학생" ||
-      e.target.value === "재학생" ||
       e.target.value === "학생회" ||
       e.target.value === "방송반" ||
       e.target.value === "신문반"
     ) {
       setIsStudent(true);
+      setIsGraduate(false);
+    } else if (e.target.value === "졸업생") {
+      setIsGraduate(true);
+      setIsStudent(false);
+    } else {
+      setIsGraduate(false);
+      setIsStudent(false);
     }
   };
 
@@ -35,6 +42,7 @@ const Register: NextPage = () => {
             grade?: HTMLInputElement;
             class?: HTMLInputElement;
             number?: HTMLInputElement;
+            graduateYear?: HTMLInputElement;
           })
         : null;
       const config = getAuthHeader(document.cookie);
@@ -44,9 +52,10 @@ const Register: NextPage = () => {
           name: formElements?.name.value,
           phone: formElements?.pNumber.value,
           authority: formElements?.authority.value,
-          grade: formElements?.grade?.value,
-          class: formElements?.class?.value,
-          number: formElements?.number?.value,
+          grade: Number(formElements?.grade?.value),
+          class: Number(formElements?.class?.value),
+          number: Number(formElements?.number?.value),
+          graduateYear: Number(formElements?.graduateYear?.value),
         };
         const res = await serverAxios.post(`/users`, body, config);
         alert("환영합니다! 관리자의 승인을 기다려주세요 :)");
@@ -97,7 +106,15 @@ const Register: NextPage = () => {
             <input name="number" className="h-8 p-1 rounded-lg" />
           </div>
         ) : null}
-        <input type="submit" placeholder="가입 신청 하기"></input>
+        {isGraduate ? (
+          <div>
+            <div>{"졸업년도를 입력해주세요. (예: 2022)"}</div>
+            <input name="graduateYear" className="h-8 p-1 rounded-lg" />
+          </div>
+        ) : null}
+        <button type="submit" className="p-1 mt-5 text-white rounded-lg bg-cp-5 hover:shadow-xl">
+          가입신청하기
+        </button>
       </form>
     </div>
   );

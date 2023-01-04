@@ -39,11 +39,13 @@ const ArticleDetail: NextPage = () => {
       <div className="mb-20">
         <div className="mx-auto my-10 text-4xl font-bold w-fit">{data?.title}</div>
         <div className="flex mx-4 my-8">
-          <div className="flex justify-between w-full my-4">
-            <div>{data ? new Date(data.updatedAt).toLocaleString() : null}</div>
-            <div className="flex justify-end w-1/3">
-              <div className="flex justify-between gap-2 ml-2 w-fit">
-                <div className="w-fit">{data?.author.authority}</div>
+          <div className="flex flex-col justify-between w-full my-4 sm:flex-row">
+            <div className="font-light text-gray-500">
+              {data ? new Date(data.updatedAt).toLocaleString() : null}
+            </div>
+            <div className="flex justify-start sm:justify-end">
+              <div className="flex justify-between gap-2 w-fit">
+                <div className="font-bold w-fit">{data?.author.authority}</div>
                 <div className="w-fit">{data?.author.nickname}</div>
               </div>
             </div>

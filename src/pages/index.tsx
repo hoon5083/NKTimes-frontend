@@ -9,7 +9,7 @@ import HomeVideoCard from "../components/pages/homeVideoCard";
 const Home: NextPage = () => {
   return (
     <div>
-      <div className="grid w-11/12 mx-auto sm:grid-cols-1 md:grid-cols-2 lg:w-3/4 xl:w-3/5 2xl: 2/5 justify-items-center justify-self-center gap-x-2 ">
+      <div className="grid w-[375px] mx-auto sm:grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 md:w-[750px] 2xl:w-[1150px] justify-items-center justify-self-center gap-x-2 ">
         <HomeMainCard />
         <HomeVideoCard order={1} />
         <HomeVideoCard order={2} />

@@ -38,8 +38,8 @@ const AddBoard: NextPage = () => {
   };
   return (
     <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
-      <div className="mx-auto my-10 text-6xl font-bold w-fit">게시판 신청하기</div>
-      <div className="mx-auto my-10 text-xl font-medium w-fit">
+      <div className="mx-auto my-10 text-4xl font-bold sm:text-6xl w-fit">게시판 신청하기</div>
+      <div className="mx-auto my-10 text-lg font-medium sm:text-xl w-fit">
         게시판을 신청하기 위해 정보를 입력해주세요
       </div>
       <form onSubmit={handleSubmit}>

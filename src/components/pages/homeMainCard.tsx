@@ -19,7 +19,7 @@ function HomeMainCard() {
         <div className="flex justify-center">
           <div className="mt-2 text-2xl font-bold">{data?.title}</div>
         </div>
-        <div className="w-full h-full p-6">
+        <div className="w-full h-full p-6 overflow-auto">
           <div
             dangerouslySetInnerHTML={{
               __html: String(data?.content),

@@ -85,8 +85,7 @@ function ArticleInputSection() {
     <div>
       <div className="text-lg">제목:</div>
       <form onSubmit={handleArticle}>
-        <input className="w-full h-10 p-2 rounded-lg" id="title" />
-        <div className="py-2"></div>
+        <input className="w-full h-10 p-2 mb-2 rounded-lg" id="title" />
         <ArticleInput
           theme="snow"
           modules={modules}
@@ -94,7 +93,7 @@ function ArticleInputSection() {
           className="h-[60vh] mb-20"
           onChange={setContent}
         />
-        <button className="w-1/12 h-10 rounded-lg bg-cp-4 hover:shadow-xl" type="submit">
+        <button className="px-2 py-1 rounded-lg w-fit bg-cp-4 hover:shadow-xl" type="submit">
           저장
         </button>
       </form>

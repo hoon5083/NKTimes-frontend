@@ -10,7 +10,7 @@ function HomeTalkingCard() {
   const { loggedIn } = useGoogleAuth();
   const user = useSWRimmutable<User>(loggedIn ? "/users/me" : null, authFetcher).data;
   const { data, mutate } = useSWR<PagedApiResponse<Talking>>(
-    loggedIn ? `/talkings?pageNumber=1&pageSize=6` : null,
+    loggedIn && user?.isApproved ? `/talkings?pageNumber=1&pageSize=6` : null,
     authFetcher
   );
   return (
@@ -20,7 +20,7 @@ function HomeTalkingCard() {
           <Link href="/talkings">
             <div className="flex justify-between align-bottom">
               <p className="inline-block py-2 text-lg font-bold">담벼락</p>
-              <p className="inline-block py-3 text-sm">더보기</p>
+              <p className="inline-block py-3 text-sm cursor-pointer hover:font-bold">더보기</p>
             </div>
           </Link>
         ) : (

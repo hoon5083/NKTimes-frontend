@@ -48,7 +48,14 @@ const AddBoard: NextPage = () => {
           <input name="title" className="w-1/2 h-8 p-1 mb-4 rounded-lg" />
           <div>게시판 소개를 입력해주세요</div>
           <input name="introduction" className="h-16 p-1 rounded-lg" />
-          <input type="submit" className="my-10"></input>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="p-1 px-2 my-10 text-white rounded-lg bg-cp-5 w-fit hover:shadow-xl"
+            >
+              신청하기
+            </button>
+          </div>
         </div>
       </form>
     </div>

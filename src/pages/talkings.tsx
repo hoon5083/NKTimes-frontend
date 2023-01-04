@@ -32,8 +32,13 @@ const Talkings: NextPage = () => {
         );
       })}
       {pageCount * 20 <= Number(data?.totalCount) ? (
-        <div className="" onClick={() => setPageCount(pageCount + 1)}>
-          더보기
+        <div className="flex justify-center">
+          <div
+            className="cursor-pointer hover:font-bold"
+            onClick={() => setPageCount(pageCount + 1)}
+          >
+            더보기
+          </div>
         </div>
       ) : null}
     </div>

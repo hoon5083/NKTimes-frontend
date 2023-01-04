@@ -19,7 +19,7 @@ function ArticleBrief({ article, boardId }: Props) {
   const condition = user?.isApproved || boardId <= 4;
   return condition ? (
     <Link href={url}>
-      <div className="w-11/12 h-32 p-4 mx-auto my-2 rounded-lg bg-cp-1">
+      <div className="w-11/12 h-32 p-4 mx-auto my-2 rounded-lg cursor-pointer bg-cp-1 hover:shadow-xl">
         <div className="flex justify-between">
           <div className="text-xl font-bold">{article.title}</div>
           <div className="flex justify-between">

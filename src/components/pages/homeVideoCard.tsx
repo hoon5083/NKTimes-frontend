@@ -26,7 +26,7 @@ function HomeVideoCard({ order }: Props) {
         <Link href="/articles/4">
           <div className="flex justify-between align-bottom">
             <p className="inline-block py-2 text-lg font-bold">최신 영상 {order}</p>
-            <p className="inline-block py-3 text-sm">더보기</p>
+            <p className="inline-block py-3 text-sm cursor-pointer hover:font-bold">더보기</p>
           </div>
         </Link>
         <YouTube

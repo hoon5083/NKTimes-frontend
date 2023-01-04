@@ -91,10 +91,10 @@ function ArticleInputSection() {
           theme="snow"
           modules={modules}
           formats={formats}
-          className="h-[60vh] mb-14"
+          className="h-[60vh] mb-20"
           onChange={setContent}
         />
-        <button className="w-1/12 h-10 rounded-lg bg-cp-4" type="submit">
+        <button className="w-1/12 h-10 rounded-lg bg-cp-4 hover:shadow-xl" type="submit">
           저장
         </button>
       </form>

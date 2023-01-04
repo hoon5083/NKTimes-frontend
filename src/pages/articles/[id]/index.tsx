@@ -36,7 +36,9 @@ const ArticleList: NextPage = () => {
         <div className="flex justify-end w-11/12 mx-auto">
           {user?.isApproved ? (
             <Link href={`/articles/${id}/write`}>
-              <button className="w-1/12 h-8 text-white rounded-lg bg-cp-5">글쓰기</button>
+              <button className="w-1/12 p-1 px-2 text-white rounded-lg bg-cp-5 hover:shadow-xl">
+                글쓰기
+              </button>
             </Link>
           ) : null}
         </div>
@@ -50,10 +52,14 @@ const ArticleList: NextPage = () => {
       )}
       <div className="flex justify-center gap-6">
         {pageIndex > 1 ? (
-          <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
+          <button onClick={() => setPageIndex(pageIndex - 1)} className="hover:font-bold">
+            Previous
+          </button>
         ) : null}
         {pageIndex < (data?.totalPages as number) ? (
-          <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+          <button onClick={() => setPageIndex(pageIndex + 1)} className="hover:font-bold">
+            Next
+          </button>
         ) : null}
       </div>
     </div>

@@ -21,7 +21,7 @@ function HomeArticleCard({ title, url, route }: Props) {
         <Link href={route}>
           <div className="flex justify-between align-bottom">
             <p className="inline-block py-2 text-lg font-bold">{title}</p>
-            <p className="inline-block py-3 text-sm">더보기</p>
+            <p className="inline-block py-3 text-sm cursor-pointer hover:font-bold">더보기</p>
           </div>
         </Link>
       </div>

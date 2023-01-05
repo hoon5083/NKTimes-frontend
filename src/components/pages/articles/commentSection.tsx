@@ -30,6 +30,7 @@ function CommentSection({ articleId }: Props) {
                 author={comment.author}
                 date={new Date(comment.createdAt)}
                 content={comment.content}
+                mutate={mutate}
               />
             );
           })

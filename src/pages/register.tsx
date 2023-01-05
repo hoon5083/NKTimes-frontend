@@ -54,9 +54,10 @@ const Register: NextPage = () => {
           authority: formElements?.authority.value,
           grade: Number(formElements?.grade?.value),
           class: Number(formElements?.class?.value),
-          number: Number(formElements?.number?.value),
+          studentId: Number(formElements?.number?.value),
           graduateYear: Number(formElements?.graduateYear?.value),
         };
+        console.log(body);
         const res = await serverAxios.post(`/users`, body, config);
         alert("환영합니다! 관리자의 승인을 기다려주세요 :)");
         router.replace("/");

@@ -12,10 +12,12 @@ import { getAuthHeader } from "../../../../utils/auth";
 import { serverAxios } from "../../../../utils/commonAxios";
 import CommentSection from "../../../../components/pages/articles/commentSection";
 import { authFetcher } from "../../../../utils/fetcher";
+import { useState } from "react";
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter();
   const { id, articleId } = router.query;
+  const [isDeleting, setIsDeleting] = useState(false);
   const user = useSWRimmutable<User>(`/users/me`, authFetcher).data;
   const { data, mutate } = useSWR<ArticleDetails>(`/articles/${id}/${articleId}`, authFetcher);
   const { loggedIn } = useGoogleAuth();
@@ -29,6 +31,13 @@ const ArticleDetail: NextPage = () => {
   const deleteLike = async () => {
     const config = getAuthHeader(document.cookie);
     await serverAxios.delete(`/articles/${id}/${articleId}/like`, config);
+    mutate();
+  };
+
+  const deleteArticle = async () => {
+    const config = getAuthHeader(document.cookie);
+    await serverAxios.delete(`/articles/${id}/${articleId}`, config);
+    router.replace(`/articles/${id}`);
     mutate();
   };
 
@@ -78,6 +87,23 @@ const ArticleDetail: NextPage = () => {
             <button className="w-1/12 h-8 text-sm rounded-lg bg-cp-4">수정하기</button>
           </Link>
         ) : ( */}
+        {user?.id === data?.author?.id ? (
+          !isDeleting ? (
+            <button
+              className="px-4 py-1 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"
+              onClick={() => setIsDeleting(true)}
+            >
+              삭제
+            </button>
+          ) : (
+            <button
+              className="px-4 py-1 text-white rounded-lg w-fit bg-cp-4 hover:shadow-xl"
+              onClick={deleteArticle}
+            >
+              확인
+            </button>
+          )
+        ) : null}
         <div></div>
         {/* )} */}
         {loggedIn ? (

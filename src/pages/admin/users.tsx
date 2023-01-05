@@ -19,11 +19,7 @@ const AdminUsers: NextPage = () => {
 
   const approveUser = (id: number) => {
     const config = getAuthHeader(document.cookie);
-    serverAxios.patch(
-      `/users/${id}`,
-      { isApproved: true, nickname: "nicknamee", phone: "01012345677" },
-      config
-    );
+    serverAxios.patch(`/users/${id}`, { isApproved: true }, config);
     mutate();
     router.replace("/admin/users");
   };

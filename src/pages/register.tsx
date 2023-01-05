@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { BaseSyntheticEvent, FormEvent, useCallback, useState } from "react";
@@ -62,6 +63,7 @@ const Register: NextPage = () => {
         alert("환영합니다! 관리자의 승인을 기다려주세요 :)");
         router.replace("/");
       } catch (e) {
+        alert(e.response.data.message); //수정필요
         console.log(e);
       }
     }

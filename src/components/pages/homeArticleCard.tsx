@@ -32,7 +32,7 @@ function HomeArticleCard({ title, url, route }: Props) {
               key={index}
               className="flex flex-row justify-between px-1 py-1 border-b-2 border-black last:border-0"
             >
-              <p className="w-7/12 pr-2 overflow-hidden">{data.title}</p>
+              <p className="w-2/3 pr-2 overflow-hidden">{data.title}</p>
               <p className="text-sm text-cp-5">{new Date(data.createdAt).toLocaleDateString()}</p>
             </li>
           );

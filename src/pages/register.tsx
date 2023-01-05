@@ -63,7 +63,8 @@ const Register: NextPage = () => {
         alert("환영합니다! 관리자의 승인을 기다려주세요 :)");
         router.replace("/");
       } catch (e) {
-        alert(e.response.data.message); //수정필요
+        const error = e as any;
+        alert(error.response.data.message); //수정필요
         console.log(e);
       }
     }

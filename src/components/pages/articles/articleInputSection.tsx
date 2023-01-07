@@ -1,50 +1,18 @@
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FormEvent, HTMLAttributes, useCallback, useState } from "react";
 import useGoogleAuth from "../../../hooks/useGoogleAuth";
 import { ArticleDetails } from "../../../types/api";
 import { getAuthHeader } from "../../../utils/auth";
 import { serverAxios } from "../../../utils/commonAxios";
-import ArticleInput from "./articleInput";
+const Editor = dynamic(() => import("../../../components/pages/articles/editor"), {
+  ssr: false,
+});
 
 function ArticleInputSection() {
   const { loggedIn } = useGoogleAuth();
-  const [content, setContent] = useState("");
   const router = useRouter();
-  const modules = {
-    toolbar: {
-      // container에 등록되는 순서대로 tool 배치
-      container: [
-        [{ font: [] }], // font 설정
-        [{ header: [1, 2, 3, 4, 5, 6, false] }], // header 설정
-        ["bold", "italic", "underline", "strike", "blockquote", "code-block", "formula"], // 굵기, 기울기, 밑줄 등 부가 tool 설정
-        [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], // 리스트, 인덴트 설정
-        ["link", "image", "video"], // 링크, 이미지, 비디오 업로드 설정
-        [{ align: [] }, { color: [] }, { background: [] }], // 정렬, 글씨 색깔, 글씨 배경색 설정
-        ["clean"], // toolbar 설정 초기화 설정
-      ],
-    },
-  };
-
-  const formats = [
-    "font",
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "code-block",
-    "formula",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "video",
-    "align",
-    "color",
-    "background",
-  ];
+  const [htmlStr, setHtmlStr] = React.useState<string>("");
 
   const handleArticle = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -56,7 +24,7 @@ function ArticleInputSection() {
               title: HTMLInputElement;
             })
           : null;
-        if (content === "") {
+        if (htmlStr === "") {
           alert("빈 글 입니다.");
           return;
         }
@@ -68,7 +36,7 @@ function ArticleInputSection() {
         const config = getAuthHeader(document.cookie);
         try {
           const body = {
-            content: content,
+            content: htmlStr,
             title: formElements?.title.value,
           };
           const res = await serverAxios.post(`/articles/${router.query.id}`, body, config);
@@ -79,21 +47,15 @@ function ArticleInputSection() {
       }
       submitGroup();
     },
-    [loggedIn, content, router]
+    [loggedIn, router, htmlStr]
   );
   return (
     <div>
       <div className="text-lg">제목:</div>
       <form onSubmit={handleArticle}>
         <input className="w-full h-10 p-2 mb-2 rounded-lg" id="title" />
-        <ArticleInput
-          theme="snow"
-          modules={modules}
-          formats={formats}
-          className="h-[60vh] mb-20"
-          onChange={setContent}
-        />
-        <button className="px-2 py-1 rounded-lg w-fit bg-cp-4 hover:shadow-xl" type="submit">
+        <Editor htmlStr={htmlStr} setHtmlStr={setHtmlStr} />
+        <button className="px-2 py-1 mt-20 rounded-lg w-fit bg-cp-4 hover:shadow-xl" type="submit">
           저장
         </button>
       </form>

@@ -13,7 +13,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 function CommentInput({ mutate, articleId }: Props) {
   const handleComment = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
       async function submitGroup() {
         const form = e.currentTarget;
         const formElements = form

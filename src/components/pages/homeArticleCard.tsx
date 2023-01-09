@@ -28,13 +28,12 @@ function HomeArticleCard({ title, url, route }: Props) {
       <ul className="px-2 list-none h-5/6">
         {data?.content.map((data, index: number) => {
           return (
-            <li
-              key={index}
-              className="flex flex-row justify-between px-1 py-1 border-b-2 border-black last:border-0"
-            >
-              <p className="w-2/3 pr-2 overflow-hidden">{data.title}</p>
-              <p className="text-sm text-cp-5">{new Date(data.createdAt).toLocaleDateString()}</p>
-            </li>
+            <Link href={route + "/" + data.id} key={index}>
+              <li className="flex flex-row justify-between px-1 py-1 border-b-2 border-black last:border-0">
+                <p className="w-2/3 pr-2 overflow-hidden hover:font-bold">{data.title}</p>
+                <p className="text-sm text-cp-5">{new Date(data.createdAt).toLocaleDateString()}</p>
+              </li>
+            </Link>
           );
         })}
       </ul>

@@ -19,7 +19,7 @@ function CommentSection({ articleId }: Props) {
   );
 
   return (
-    <div className="w-full h-32 p-4 mx-auto">
+    <div className="w-full p-4 mx-auto h-fit">
       {loggedIn ? <CommentInput articleId={articleId} mutate={mutate} /> : null}
       {loggedIn
         ? data?.content.map((comment, index: number) => {

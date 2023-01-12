@@ -29,8 +29,10 @@ function HomeArticleCard({ title, url, route }: Props) {
         {data?.content.map((data, index: number) => {
           return (
             <Link href={route + "/" + data.id} key={index}>
-              <li className="flex flex-row justify-between px-1 py-1 border-b-2 border-black last:border-0">
-                <p className="w-2/3 pr-2 overflow-hidden hover:font-bold">{data.title}</p>
+              <li className="flex flex-row justify-between px-1 py-1 border-b-2 border-black last:border-0 ">
+                <p className="w-2/3 pr-2 overflow-hidden hover:font-bold text-ellipsis whitespace-nowrap">
+                  {data.title}
+                </p>
                 <p className="text-sm text-cp-5">{new Date(data.createdAt).toLocaleDateString()}</p>
               </li>
             </Link>

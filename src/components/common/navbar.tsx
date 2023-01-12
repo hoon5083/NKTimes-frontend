@@ -18,7 +18,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="flex justify-between mb-5 sh-12 bg-cp-4">
+      <div className="flex justify-between h-12 mb-5 bg-cp-4">
         <div className="flex">
           <Link href="/">
             <p className="px-2 m-2 text-2xl cursor-pointer">NKTimes</p>

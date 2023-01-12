@@ -61,7 +61,7 @@ const Editor: NextPage<IEditor> = ({ htmlStr, setHtmlStr }) => {
           ["bold", "italic", "underline", "strike"], // 굵기, 기울기, 밑줄 등 부가 tool 설정
           [], // 리스트, 인덴트 설정
           ["image"], // 링크, 이미지, 비디오 업로드 설정
-          [{ align: [] }, { color: [] }, { background: [] }], // 정렬, 글씨 색깔, 글씨 배경색 설정
+          [], // 정렬, 글씨 색깔, 글씨 배경색 설정
           ["clean"], // toolbar 설정 초기화 설정
         ],
 

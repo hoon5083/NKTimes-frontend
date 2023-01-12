@@ -35,7 +35,7 @@ function CommentCard({ author, date, content, commentId, mutate }: Props) {
       </div>
       <div>
         <div>{content}</div>
-        {user?.id === author?.id ? (
+        {user?.id === author?.id || user?.authority === "관리자" ? (
           !isDeleting ? (
             <button
               className="px-4 py-1 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"

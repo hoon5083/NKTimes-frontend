@@ -45,8 +45,12 @@ function ArticleModifySection({ title, content, setIsModyfing }: Props) {
             content: htmlStr,
             title: formElements?.title.value,
           };
-          const res = await serverAxios.post(`/articles/${router.query.id}`, body, config);
-          router.replace(`/articles/${router.query.id}/${res.data.id}`);
+          const res = await serverAxios.patch(
+            `/articles/${router.query.id}/${router.query.articleId}`,
+            body,
+            config
+          );
+          router.replace(`/articles/${router.query.id}/${router.query.articleId}`);
         } catch (e) {
           console.log(e);
         }

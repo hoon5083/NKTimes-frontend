@@ -16,9 +16,6 @@ function HomeMainCard() {
   return (
     <Link href={`/articles/2/${articleId}`}>
       <div className="flex flex-col w-full h-[60vh] sm:col-span-1 md:col-span-2 row-span-2 mx-2 mb-4 rounded-xl bg-cp-1 cursor-pointer">
-        <div className="flex justify-center">
-          <div className="mt-2 text-2xl font-bold">{data?.title}</div>
-        </div>
         <div className="w-full h-full p-6 overflow-auto">
           <div
             dangerouslySetInnerHTML={{

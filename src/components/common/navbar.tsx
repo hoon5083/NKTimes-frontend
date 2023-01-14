@@ -27,6 +27,20 @@ function Navbar() {
             <FontAwesomeIcon icon={faList} />
           </button>
         </div>
+        <div className="flex flex-row justify-between w-1/2 py-3">
+          <Link href="/articles/10">
+            <div className="cursor-pointer hover:font-bold">신문반</div>
+          </Link>
+          <Link href="/articles/11">
+            <div className="cursor-pointer hover:font-bold">방송반</div>
+          </Link>
+          <Link href="/articles/12">
+            <div className="cursor-pointer hover:font-bold">학생회</div>
+          </Link>
+          <Link href="/articles/8">
+            <div className="cursor-pointer hover:font-bold">후배사랑장학회</div>
+          </Link>
+        </div>
         <div className="flex">
           {data?.isApproved ? (
             <Link href="/board">

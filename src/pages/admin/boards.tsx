@@ -68,7 +68,7 @@ const AdminBoards: NextPage = () => {
                   approveBoard(board.id);
                 }}
                 type="submit"
-                className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5"
+                className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
               >
                 승인
               </button>
@@ -79,7 +79,7 @@ const AdminBoards: NextPage = () => {
                   deleteBoard(board.id);
                 }}
                 type="submit"
-                className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-4"
+                className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-4 hover:shadow-xl"
               >
                 확인
               </button>
@@ -89,7 +89,7 @@ const AdminBoards: NextPage = () => {
                   setDeletingNum(index);
                 }}
                 type="submit"
-                className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5"
+                className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
               >
                 삭제
               </button>

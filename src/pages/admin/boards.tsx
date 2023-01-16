@@ -23,14 +23,16 @@ const AdminBoards: NextPage = () => {
   const approveBoard = (id: number) => {
     const config = getAuthHeader(document.cookie);
     serverAxios.patch(`/boards/${id}`, { isApproved: true }, config);
+    location.reload();
     mutate();
   };
 
   const deleteBoard = (id: number) => {
     const config = getAuthHeader(document.cookie);
     serverAxios.delete(`/boards/${id}`, config);
-    mutate();
     setDeletingNum(-1);
+    location.reload();
+    mutate();
   };
 
   const handleType = (e: BaseSyntheticEvent) => {
@@ -51,12 +53,11 @@ const AdminBoards: NextPage = () => {
       {data?.content.map((board, index: number) => {
         return (
           <div key={index} className="p-2 my-2 rounded-lg bg-cp-1">
-            <div className="mb-2">게시판 이름:{board.title}</div>
-            <div>게시판 소개:{board.introduction}</div>
+            <div className="mb-2">이름: {board.title}</div>
+            <div>소개: {board.introduction}</div>
             {type !== "approved" ? (
               <div>
-                신청인 정보:
-                {board.applicant?.authority}
+                신청인: {board.applicant?.authority}
                 {"  "}
                 {board.applicant?.nickname}
               </div>

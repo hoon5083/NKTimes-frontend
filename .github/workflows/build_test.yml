@@ -1,0 +1,43 @@
+name: build_test
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [16.17.0]
+
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Check Yarn -v
+        run: yarn -v
+
+      - name: create env file
+        working-directory: ./
+        run: |
+          pwd
+          touch .env
+          echo NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} >> .env
+          echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env
+          echo NEXT_PUBLIC_APP_DOMAIN=${{ secrets.NEXT_PUBLIC_APP_DOMAIN }} >> .env
+          echo NEXT_PUBLIC_ENDPOINT=${{ secrets.NEXT_PUBLIC_ENDPOINT }} >> .env
+          echo NEXT_PUBLIC_LUNCH_KEY=${{ secrets.NEXT_PUBLIC_LUNCH_KEY }} >> .env
+          cat .env
+
+      - name: build server files
+        working-directory: ./
+        run: |
+          yarn
+          yarn build

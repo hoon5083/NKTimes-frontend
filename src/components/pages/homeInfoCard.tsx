@@ -17,13 +17,13 @@ function HomeInfoCard() {
 
           <div className="flex flex-col">
             <div className="self-center font-bold">{data?.title}</div>
-            <p className="inline-block py-3 text-sm">
+            <div className="inline-block py-3 text-sm">
               <div
                 dangerouslySetInnerHTML={{
                   __html: String(data?.content),
                 }}
               />
-            </p>
+            </div>
           </div>
         </div>
       </div>

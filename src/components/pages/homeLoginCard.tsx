@@ -10,11 +10,11 @@ function HomeLoginCard() {
   const { logout, loggedIn } = useGoogleAuth();
   const { data } = useSWR<User>(loggedIn ? "/users/me" : null, authFetcher);
   return (
-    <div className="flex flex-col w-full h-64 p-4 mx-2 mb-4 rounded-xl bg-cp-1">
+    <div className="flex flex-col justify-center w-full h-64 p-4 mx-2 mb-4 rounded-xl bg-cp-1">
       <div className="flex flex-col justify-center align-middle">
         {data ? (
           <div id="auth_element_user-login-trigger">
-            <div className="flex gap-2">
+            <div className="flex justify-center gap-2">
               <div>{data?.authority}</div>
               <div>{data?.nickname}</div>
             </div>
@@ -32,13 +32,13 @@ function HomeLoginCard() {
                 <div className="cursor-pointer hover:font-bold">로그아웃</div>
               </button>
             ) : (
-              <div>Guest</div>
+              <div className="text-center">Guest</div>
             )}
           </div>
         )}
-        <div>
+        <div className="flex justify-center mt-5">
           {loggedIn && data ? (
-            <div onClick={logout} className="cursor-pointer hover:font-bold">
+            <div onClick={logout} className="text-center cursor-pointer hover:font-bold">
               로그아웃
             </div>
           ) : (

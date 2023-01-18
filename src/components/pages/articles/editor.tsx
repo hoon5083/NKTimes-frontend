@@ -107,7 +107,7 @@ const Editor: NextPage<IEditor> = ({ htmlStr, setHtmlStr }) => {
       onChange={(content: any, delta: any, source: any, editor: any) =>
         setHtmlStr(editor.getHTML())
       }
-      className="h-72"
+      className="mb-12 h-72"
     />
   );
 };

@@ -50,42 +50,6 @@ function Navbar() {
               />
             </Link>
           ) : null}
-          <div>
-            {!loggedIn || data ? (
-              <button
-                className="p-0 border-none outline-none cursor-pointer"
-                onClick={() => setIsLBOpen(!isLBOpen)}
-                id="auth_element_user-login-trigger"
-              >
-                <div className="z-50 h-12 p-3 bg-transparent rounded-lg w-fit hover:font-bold">
-                  {loggedIn ? data?.nickname : "Guest"}
-                </div>
-              </button>
-            ) : (
-              <button
-                className="p-0 border-none outline-none"
-                onClick={() => {
-                  logout();
-                  router.replace("/");
-                }}
-              >
-                <div className="z-50 w-48 h-12 p-3 bg-transparent rounded-lg cursor-pointer hover:font-bold">
-                  로그아웃
-                </div>
-              </button>
-            )}
-            {isLBOpen && (
-              <div className="justify-center w-48 rounded-md">
-                {loggedIn ? (
-                  <div onClick={logout} className="flex justify-center">
-                    로그아웃
-                  </div>
-                ) : (
-                  <div id="auth_element_user-login-google"></div>
-                )}
-              </div>
-            )}
-          </div>
         </div>
       </div>
       {isDDOpen ? (

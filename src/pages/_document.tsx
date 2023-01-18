@@ -147,19 +147,15 @@ class MyDocument extends Document {
                     callback: WebApp.HANDLER.googleAuth.credentialResponse,
                   });
 
-                  if (document.getElementById("auth_element_user-login-trigger") !== null) {
-                    document
-                      .getElementById("auth_element_user-login-trigger")
-                      .addEventListener("click", function () {
-                        setTimeout(function () {
-                          google.accounts.id.renderButton(
-                            document.getElementById("auth_element_user-login-google"),
-                            { type: "standard", theme: "outline", size: "large" }
-                          );
-                        }, 100);
-                      });
-                  }
-
+                  document
+                    .getElementById("auth_element_user-login-trigger")
+                      setTimeout(function () {
+                        google.accounts.id.renderButton(
+                          document.getElementById("auth_element_user-login-google"),
+                          { type: "standard", theme: "outline", size: "large" }
+                        );
+                      }, 100);
+                  
                   if (typeof Cookies.get("auth_platform") == "string") {
                     switch (Cookies.get("auth_platform")) {
                       case "google":

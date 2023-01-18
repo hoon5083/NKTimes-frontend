@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import HomeArticleCard from "../components/pages/homeArticleCard";
 import HomeInfoCard from "../components/pages/homeInfoCard";
-//import HomeLoginCard from "../components/pages/homeLoginCard";
+import HomeLoginCard from "../components/pages/homeLoginCard";
 import HomeLunchCard from "../components/pages/homeLunchCard";
 import HomeMainArticleCard from "../components/pages/homeMainArticleCard";
 import HomeMainCard from "../components/pages/homeMainCard";
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         <HomeArticleCard title="공지" url="/articles/1" route="/articles/1" />
         <HomeArticleCard title="자유게시판" url="/articles/3" route="/articles/3" />
         {/* <HomeInfoCard /> */}
-        {/* <HomeLoginCard /> */}
+        <HomeLoginCard />
       </div>
     </div>
   );

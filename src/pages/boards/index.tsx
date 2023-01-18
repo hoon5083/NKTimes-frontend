@@ -9,7 +9,7 @@ const Boards: NextPage = () => {
   return (
     <div className="min-h-[70vh] flex flex-col items-center gap-8">
       <div className="text-4xl font-bold">게시판 전체보기</div>
-      <div className="grid w-full grid-cols-1 sm:grid-cols-3 md:grid-cols-4">
+      <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
         {data?.content.map((board, index: number) => {
           return (
             <Link href={`articles/${board.id}`} key={index}>

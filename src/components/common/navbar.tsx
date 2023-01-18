@@ -22,10 +22,12 @@ function Navbar() {
         <div className="flex">
           <Link href="/">
             <p className="px-2 m-2 text-2xl cursor-pointer">NKTimes</p>
+          </Link>{" "}
+          <Link href="/boards">
+            <button className="hover:text-white">
+              <FontAwesomeIcon icon={faList} />
+            </button>
           </Link>
-          <button onClick={() => setIsDDOpen(!isDDOpen)} className="hover:text-white">
-            <FontAwesomeIcon icon={faList} />
-          </button>
         </div>
         <div className="flex flex-row justify-between w-1/2 py-3">
           <Link href="/articles/10">
@@ -43,7 +45,7 @@ function Navbar() {
         </div>
         <div className="flex">
           {data?.isApproved ? (
-            <Link href="/board">
+            <Link href="/boards/apply">
               <FontAwesomeIcon
                 icon={faPlus}
                 className="z-50 p-3 my-1 bg-transparent rounded-lg w-fit hover:font-bold"

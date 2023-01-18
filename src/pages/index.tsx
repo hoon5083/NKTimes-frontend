@@ -11,7 +11,7 @@ import HomeVideoCard from "../components/pages/homeVideoCard";
 const Home: NextPage = () => {
   return (
     <div>
-      <div className="grid w-[375px] mx-auto sm:grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 md:w-[750px] 2xl:w-[1150px] justify-items-center justify-self-center gap-x-2 ">
+      <div className="grid w-[375px] mx-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:w-[750px] xl:w-[1150px] justify-items-center justify-self-center gap-x-2 ">
         <HomeInfoCard />
         <HomeMainCard />
         <HomeMainArticleCard title="기사" url="/articles/2" route="/articles/2" />

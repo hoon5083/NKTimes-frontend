@@ -23,7 +23,7 @@ function Navbar() {
         <div className="flex">
           <Link href="/">
             <p className="px-2 m-2 text-2xl cursor-pointer">
-              <Image src="/nklogo.png" width="50px" height="20px"></Image>Times
+              <Image src="/nklogo.png" width="50px" height="20px" alt="nklogo"></Image>Times
             </p>
           </Link>{" "}
           <Link href="/boards">

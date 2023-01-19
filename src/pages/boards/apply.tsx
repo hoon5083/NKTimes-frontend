@@ -1,9 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { BaseSyntheticEvent, FormEvent } from "react";
-import { arrayBuffer } from "stream/consumers";
-import useSWRImmutable from "swr";
-import useSWR from "swr";
+import { FormEvent } from "react";
 import { getAuthHeader } from "../../utils/auth";
 import { serverAxios } from "../../utils/commonAxios";
 

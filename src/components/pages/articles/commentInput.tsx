@@ -47,7 +47,7 @@ function CommentInput({ mutate, articleId }: Props) {
         placeholder="댓글을 남겨주세요"
         name="content"
       />
-      <button className="w-1/6 h-20 rounded-lg bg-cp-4" type="submit">
+      <button className="w-1/6 h-20 text-white rounded-lg bg-cp-5" type="submit">
         글쓰기
       </button>
     </form>

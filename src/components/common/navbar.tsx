@@ -11,9 +11,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 function Navbar() {
-  const router = useRouter();
-  const { logout, loggedIn } = useGoogleAuth();
-  const [isLBOpen, setIsLBOpen] = useState(false);
+  const { loggedIn } = useGoogleAuth();
   const [isDDOpen, setIsDDOpen] = useState(false);
   const { data } = useSWR<User>(loggedIn ? "/users/me" : null, authFetcher);
 
@@ -22,9 +20,10 @@ function Navbar() {
       <div className="flex justify-between h-12 mb-5 bg-cp-1">
         <div className="flex">
           <Link href="/">
-            <p className="px-2 m-2 text-2xl cursor-pointer">
-              <Image src="/nklogo.png" width="50px" height="20px" alt="nklogo"></Image>Times
-            </p>
+            <a className="flex px-2 m-2 cursor-pointer">
+              <Image src="/images/nklogo.png" width="60px" height="10px" alt="nklogo"></Image>
+              <div className="text-2xl">Times</div>
+            </a>
           </Link>{" "}
           <Link href="/boards">
             <button className="hover:text-cp-4">

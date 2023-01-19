@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
 import BoardDropdown from "./boardDropdown";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 function Navbar() {
   const router = useRouter();
@@ -21,7 +22,9 @@ function Navbar() {
       <div className="flex justify-between h-12 mb-5 bg-cp-1">
         <div className="flex">
           <Link href="/">
-            <p className="px-2 m-2 text-2xl cursor-pointer">NKTimes</p>
+            <p className="px-2 m-2 text-2xl cursor-pointer">
+              <Image src="/nklogo.png" width="50px" height="20px"></Image>Times
+            </p>
           </Link>{" "}
           <Link href="/boards">
             <button className="hover:text-cp-4">

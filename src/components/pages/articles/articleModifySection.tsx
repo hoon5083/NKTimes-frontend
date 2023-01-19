@@ -67,7 +67,10 @@ function ArticleModifySection({ title, content, setIsModyfing }: Props) {
       <form onSubmit={handleArticle}>
         <input className="w-full h-10 p-2 mb-2 rounded-lg" id="title" defaultValue={title} />
         <Editor htmlStr={htmlStr} setHtmlStr={setHtmlStr} />
-        <button className="px-2 py-1 mt-20 rounded-lg w-fit bg-cp-4 hover:shadow-xl" type="submit">
+        <button
+          className="px-2 py-1 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"
+          type="submit"
+        >
           저장
         </button>
       </form>

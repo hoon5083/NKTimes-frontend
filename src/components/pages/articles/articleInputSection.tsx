@@ -15,15 +15,17 @@ function ArticleInputSection() {
   const [htmlStr, setHtmlStr] = React.useState<string>("");
 
   const handleArticle = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
+    (e: any) => {
       e.preventDefault();
       async function submitGroup() {
         const form = e.currentTarget;
         const formElements = form
           ? (form.elements as typeof form.elements & {
               title: HTMLInputElement;
+              file: HTMLInputElement;
             })
           : null;
+        console.log(formElements.files);
         if (htmlStr === "") {
           alert("빈 글 입니다.");
           return;
@@ -52,10 +54,20 @@ function ArticleInputSection() {
   return (
     <div>
       <div className="text-lg">제목:</div>
-      <form onSubmit={handleArticle}>
-        <input className="w-full h-10 p-2 mb-2 rounded-lg" id="title" />
+      <form onSubmit={handleArticle} className="flex flex-col gap-2">
+        <input className="w-full h-10 p-2 rounded-lg" id="title" />
+        <div className="text-sm font-light text-gray">
+          100mb이하의 png, jpg, jpeg, bmp 이미지만 삽입 가능합니다.
+        </div>
         <Editor htmlStr={htmlStr} setHtmlStr={setHtmlStr} />
-        <button className="px-2 py-1 mt-20 rounded-lg w-fit bg-cp-4 hover:shadow-xl" type="submit">
+        <div className="text-sm font-light text-gray">
+          100mb이하의 pdf, doc, docx 파일만 첨부 가능합니다.
+        </div>
+        <input type="file" id="file" />
+        <button
+          className="px-2 py-1 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"
+          type="submit"
+        >
           저장
         </button>
       </form>

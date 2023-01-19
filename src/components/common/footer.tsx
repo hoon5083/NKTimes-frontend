@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="w-full p-8 mt-10 text-xs h-52 bg-cp-4">
+    <div className="w-full p-8 mt-10 text-xs h-52 bg-cp-3">
       <div>
         <p className="mb-4 text-lg font-bold">NKTIMES</p>
 

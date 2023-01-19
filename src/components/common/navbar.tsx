@@ -18,13 +18,13 @@ function Navbar() {
 
   return (
     <>
-      <div className="flex justify-between h-12 mb-5 bg-cp-4">
+      <div className="flex justify-between h-12 mb-5 bg-cp-1">
         <div className="flex">
           <Link href="/">
             <p className="px-2 m-2 text-2xl cursor-pointer">NKTimes</p>
           </Link>{" "}
           <Link href="/boards">
-            <button className="hover:text-white">
+            <button className="hover:text-cp-4">
               <FontAwesomeIcon icon={faList} />
             </button>
           </Link>
@@ -48,7 +48,7 @@ function Navbar() {
             <Link href="/boards/apply">
               <FontAwesomeIcon
                 icon={faPlus}
-                className="z-50 p-3 my-1 bg-transparent rounded-lg w-fit hover:font-bold"
+                className="z-50 p-3 my-1 bg-transparent rounded-lg w-fit hover:text-cp-4"
               />
             </Link>
           ) : null}

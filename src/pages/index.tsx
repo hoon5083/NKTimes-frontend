@@ -18,7 +18,6 @@ const Home: NextPage = () => {
         <HomeVideoCard order={1} />
         <HomeVideoCard order={2} />
         <HomeArticleCard title="자유게시판" url="/articles/3" route="/articles/3" />
-        {/* <HomeInfoCard /> */}
         <HomeLoginCard />
       </div>
     </div>

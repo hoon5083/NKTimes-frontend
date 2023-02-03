@@ -4,6 +4,7 @@ import useGoogleAuth from "../../hooks/useGoogleAuth";
 import { User } from "../../types/api";
 import { authFetcher } from "../../utils/fetcher";
 import useSWR from "swr";
+import Link from "next/link";
 
 function HomeLoginCard() {
   const router = useRouter();
@@ -14,10 +15,12 @@ function HomeLoginCard() {
       <div className="flex flex-col justify-center align-middle">
         {data ? (
           <div id="auth_element_user-login-trigger">
-            <div className="flex justify-center gap-2">
-              <div>{data?.authority}</div>
-              <div>{data?.nickname}</div>
-            </div>
+            <Link href="/users/mypage">
+              <div className="flex justify-center gap-2 cursor-pointer hover:font-bold">
+                <div>{data?.authority}</div>
+                <div>{data?.nickname}</div>
+              </div>
+            </Link>
           </div>
         ) : (
           <div>

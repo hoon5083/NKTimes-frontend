@@ -5,7 +5,7 @@ import { useState } from "react";
 import { arrayBuffer } from "stream/consumers";
 import useSWRImmutable from "swr";
 import useSWR from "swr";
-import ArticleBrief from "../../../components/pages/boards/articleBrief";
+import ArticleBrief from "../../../components/pages/articles/articleBrief";
 import { ARTICLES_PAGE_SIZE } from "../../../constants/articles";
 import useGoogleAuth from "../../../hooks/useGoogleAuth";
 import { Article, Board, PagedApiResponse, User } from "../../../types/api";

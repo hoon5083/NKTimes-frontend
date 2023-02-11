@@ -2,16 +2,14 @@ import type { NextPage } from "next";
 import HomeArticleCard from "../components/pages/homeArticleCard";
 import HomeInfoCard from "../components/pages/homeInfoCard";
 import HomeLoginCard from "../components/pages/homeLoginCard";
-import HomeLunchCard from "../components/pages/homeLunchCard";
 import HomeMainArticleCard from "../components/pages/homeMainArticleCard";
 import HomeMainCard from "../components/pages/homeMainCard";
-import HomeTalkingCard from "../components/pages/homeTalkingCard";
 import HomeVideoCard from "../components/pages/homeVideoCard";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <div className="grid w-[375px] mx-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:w-[750px] xl:w-[1150px] justify-items-center justify-self-center gap-x-2 ">
+      <div className="grid w-[375px] mx-auto grid-cols-1 md:grid-cols-2 md:w-[750px] justify-items-center justify-self-center gap-x-4">
         <HomeInfoCard />
         <HomeMainCard />
         <HomeMainArticleCard title="기사" url="/articles/2" route="/articles/2" />

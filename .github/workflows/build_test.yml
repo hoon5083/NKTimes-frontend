@@ -36,22 +36,8 @@ jobs:
           echo NEXT_PUBLIC_LUNCH_KEY=${{ secrets.NEXT_PUBLIC_LUNCH_KEY }} >> .env
           cat .env
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - name: build server files
         working-directory: ./
         run: |
           yarn
           yarn build
-          ls -al ./public/
-          ls -al ./.next/cache/

@@ -41,4 +41,5 @@ jobs:
         run: |
           yarn
           yarn build
+          ls -al ./public/
           ls -al ./.next/cache/

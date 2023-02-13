@@ -12,7 +12,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 function HomeMainArticleCard({ title, url, route }: Props) {
   const { data, mutate } = useSWR<PagedApiResponse<Article>>(
-    `${url}?pageNumber=1&pageSize=10`,
+    `${url}?pageNumber=1&pageSize=6`,
     authFetcher
   );
   return (

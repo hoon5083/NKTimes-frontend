@@ -7,12 +7,10 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
 import BoardDropdown from "./boardDropdown";
-import { useRouter } from "next/router";
 import Image from "next/image";
 
 function Navbar() {
   const { loggedIn } = useGoogleAuth();
-  const [isDDOpen, setIsDDOpen] = useState(false);
   const { data } = useSWR<User>(loggedIn ? "/users/me" : null, authFetcher);
 
   return (
@@ -56,13 +54,6 @@ function Navbar() {
           ) : null}
         </div>
       </div>
-      {isDDOpen ? (
-        <BoardDropdown
-          setDD={() => {
-            setIsDDOpen(false);
-          }}
-        />
-      ) : null}
     </>
   );
 }

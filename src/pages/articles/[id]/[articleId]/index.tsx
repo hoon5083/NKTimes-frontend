@@ -46,7 +46,7 @@ const ArticleDetail: NextPage = () => {
   const videoId = data?.content.slice(3, -4);
 
   return (
-    <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
+    <div className="flex flex-col w-11/12 min-h-screen max-w-5xl mx-auto justify-self-center justify-items-center">
       {!isModifying ? (
         <div>
           <div className="mb-20">
@@ -88,7 +88,7 @@ const ArticleDetail: NextPage = () => {
           <div className="flex justify-between w-11/12 mx-auto justify-self-center">
             <div className="flex gap-2">
               {(user?.id === data?.author?.id || user?.authority === "관리자") &&
-              isModifying === false ? (
+              !isModifying ? (
                 <button
                   className="px-4 py-1 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"
                   onClick={() => setIsModifying(true)}

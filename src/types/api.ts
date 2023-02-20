@@ -21,7 +21,7 @@ export interface User {
   phone: number;
   name: string;
   isApproved: boolean;
-  graduateYear: Date;
+  graduateYear: number;
   middleSchool: string;
   fileKey: string;
 }

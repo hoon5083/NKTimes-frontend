@@ -2,7 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: [develop]
+    branches: [ develop ]
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.17.0]
+        node-version: [ 16.17.0 ]
 
     steps:
       - name: Checkout source code.
@@ -42,7 +42,7 @@ jobs:
           yarn
           yarn build
       - name: zip file
-        run: zip -r nktimes-frontend.zip ./.next ./scripts ./appspec.yml ./.env ./package.json ./public
+        run: zip -r nktimes-frontend.zip ./.next ./scripts ./appspec.yml ./.env ./package.json ./public ./next.config.js
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1

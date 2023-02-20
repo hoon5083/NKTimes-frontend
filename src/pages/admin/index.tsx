@@ -16,9 +16,11 @@ const Admin: NextPage = () => {
             유저 관리
           </button>
         </Link>
-        {/* <Link href="/admin/popups">
-        <div>팝업 관리</div>
-      </Link> */}
+        <Link href="/admin/popups">
+          <button className="p-1 px-2 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl">
+            팝업 관리
+          </button>
+        </Link>
       </div>
     </div>
   );

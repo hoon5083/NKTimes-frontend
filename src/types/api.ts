@@ -27,7 +27,7 @@ export interface User {
 }
 
 export interface Popup {
-  key: string;
+  photoKey: string;
 }
 
 export interface PopupDetails {

@@ -21,10 +21,13 @@ export interface User {
   phone: number;
   name: string;
   isApproved: boolean;
+  graduateYear: number;
+  middleSchool: string;
+  fileKey: string;
 }
 
 export interface Popup {
-  key: string;
+  photoKey: string;
 }
 
 export interface PopupDetails {
@@ -38,6 +41,7 @@ export interface Author {
   authority: "관리자" | "졸업생" | "교사" | "학생회" | "신문부" | "방송반" | "재학생";
   grade: null | number;
   class: null | number;
+  fileKey: string;
 }
 
 export interface Article {
@@ -84,6 +88,7 @@ export interface File {
   createdAt: Date;
   articleId: number | undefined;
   popupId: number | undefined;
+
 }
 
 export interface Comment {

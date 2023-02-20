@@ -14,6 +14,7 @@ import CommentSection from "../../../../components/pages/articles/commentSection
 import { authFetcher } from "../../../../utils/fetcher";
 import { useState } from "react";
 import ArticleModifySection from "../../../../components/pages/articles/articleModifySection";
+import Image from "next/image";
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const ArticleDetail: NextPage = () => {
   const videoId = data?.content.slice(3, -4);
 
   return (
-    <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
+    <div className="flex flex-col w-11/12 min-h-screen max-w-5xl mx-auto justify-self-center justify-items-center">
       {!isModifying ? (
         <div>
           <div className="mb-20">
@@ -85,10 +86,18 @@ const ArticleDetail: NextPage = () => {
               />
             )}
           </div>
+          <div className="w-full flex justify-end mb-10 pr-10">
+            {data?.author.fileKey ?
+              <Image className="rounded-2xl"
+                     src={`${process.env.NEXT_PUBLIC_ENDPOINT}/files/${data?.author.fileKey}`}
+                     alt="작성자 프로필사진" width={100}
+                     height={100} />
+              : null}
+          </div>
           <div className="flex justify-between w-11/12 mx-auto justify-self-center">
             <div className="flex gap-2">
               {(user?.id === data?.author?.id || user?.authority === "관리자") &&
-              isModifying === false ? (
+              !isModifying ? (
                 <button
                   className="px-4 py-1 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"
                   onClick={() => setIsModifying(true)}

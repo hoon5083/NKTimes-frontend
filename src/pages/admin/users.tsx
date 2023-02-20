@@ -1,8 +1,7 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import { BaseSyntheticEvent, FormEvent, useState } from "react";
 import useSWR from "swr";
-import { BoardDetails, PagedApiResponse, User } from "../../types/api";
+import { PagedApiResponse, User } from "../../types/api";
 import { getAuthHeader } from "../../utils/auth";
 import { serverAxios } from "../../utils/commonAxios";
 import { authFetcher } from "../../utils/fetcher";
@@ -10,14 +9,16 @@ import { authFetcher } from "../../utils/fetcher";
 const AdminUsers: NextPage = () => {
   const [pageIndex, setPageIndex] = useState(1);
   const [type, setType] = useState("all");
+  const [authority, setAuthority] = useState("all");
+  const [grade, setGrade] = useState(0);
+  const [_class, setClass] = useState(0);
   const [deletingNum, setDeletingNum] = useState(-1);
   const [editingNum, setEditingNum] = useState(-1);
-  const [isStudent, setIsStudent] = useState(false);
-  const [isGraduate, setIsGraduate] = useState(false);
+  const key = `/users?pageNumber=${pageIndex}&pageSize=20` + (type === "pending" ? "&isPending=true" : "") + (authority !== "all" ? `&authority=${authority}` : "") + (grade !== 0 ? `&grade=${grade}` : "") + (_class !== 0 ? `&class=${_class}` : "");
 
   const { data, mutate } = useSWR<PagedApiResponse<User>>(
-    `/users?pageNumber=${pageIndex}&pageSize=20` + (type === "pending" ? "&isPending=true" : ""),
-    authFetcher
+    key,
+    authFetcher,
   );
 
   const approveUser = (id: number) => {
@@ -35,33 +36,15 @@ const AdminUsers: NextPage = () => {
     mutate();
   };
 
-  const handleAuthority = (e: BaseSyntheticEvent) => {
-    e.preventDefault();
-    if (
-      e.target.value === "재학생" ||
-      e.target.value === "학생회" ||
-      e.target.value === "방송반" ||
-      e.target.value === "신문반"
-    ) {
-      setIsStudent(true);
-      setIsGraduate(false);
-    } else if (e.target.value === "졸업생") {
-      setIsGraduate(true);
-      setIsStudent(false);
-    } else {
-      setIsGraduate(false);
-      setIsStudent(false);
-    }
-  };
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     async function submitGroup() {
       const form = e.currentTarget;
       const formElements = form
         ? (form.elements as typeof form.elements & {
-            authority: HTMLInputElement;
-          })
+          authority: HTMLInputElement;
+        })
         : null;
       const config = getAuthHeader(document.cookie);
       try {
@@ -77,21 +60,61 @@ const AdminUsers: NextPage = () => {
         console.log(e);
       }
     }
+
     submitGroup();
   };
-
   const handleType = (e: BaseSyntheticEvent) => {
     e.preventDefault();
     setType(e.target.value);
   };
 
+  const handleAuthSelect = (e: BaseSyntheticEvent) => {
+    e.preventDefault();
+    setAuthority(e.target.value);
+  };
+  const handleGrade = (e: BaseSyntheticEvent) => {
+    e.preventDefault();
+    setGrade(Number(e.target.value));
+  };
+  const handleClass = (e: BaseSyntheticEvent) => {
+    e.preventDefault();
+    setClass(Number(e.target.value));
+  };
+
   return (
     <div className="flex flex-col w-11/12 min-h-screen mx-auto justify-self-center justify-items-center">
       <div className="mx-auto my-10 text-6xl font-bold w-fit">유저 관리페이지</div>
-      <form>
+      <form className="flex gap-2">
         <select onChange={handleType} className="p-1 px-2 rounded-lg">
           <option value="all">모두</option>
           <option value="pending">대기중</option>
+        </select>
+        <select onChange={handleAuthSelect} className="p-1 px-2 rounded-lg">
+          <option value="all">권한</option>
+          <option value="교사">교사</option>
+          <option value="학생회">학생회</option>
+          <option value="신문반">신문반</option>
+          <option value="방송반">방송반</option>
+          <option value="재학생">재학생</option>
+        </select>
+        <select onChange={handleGrade} className="p-1 px-2 rounded-lg">
+          <option value={0}>학년</option>
+          <option value={1}>1학년</option>
+          <option value={2}>2학년</option>
+          <option value={3}>3학년</option>
+        </select>
+        <select onChange={handleClass} className="p-1 px-2 rounded-lg">
+          <option value={0}>반</option>
+          <option value={1}>1반</option>
+          <option value={2}>2반</option>
+          <option value={3}>3반</option>
+          <option value={4}>4반</option>
+          <option value={5}>5반</option>
+          <option value={6}>6반</option>
+          <option value={7}>7반</option>
+          <option value={8}>8반</option>
+          <option value={9}>9반</option>
+          <option value={10}>10반</option>
         </select>
       </form>
       {data?.content.map((user, index: number) => {

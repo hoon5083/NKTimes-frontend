@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
 
 class MyDocument extends Document {
@@ -6,15 +6,16 @@ class MyDocument extends Document {
     return (
       <Html className="font-sans bg-cp-2">
         <Head>
+          <title>NKTimes</title>
           <link href="/favicon.ico" rel="shortcut icon" />
           <script src="https://accounts.google.com/gsi/client" async defer></script>
           <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         </Head>
         <body>
-          <Main />
-          <NextScript />
-          <Script id="google-auth" strategy="beforeInteractive">
-            {`
+        <Main />
+        <NextScript />
+        <Script id="google-auth" strategy="beforeInteractive">
+          {`
           /*! js-cookie v3.0.1 | MIT */
           !(function (e, t) {
             "object" == typeof exports && "undefined" != typeof module
@@ -232,7 +233,7 @@ class MyDocument extends Document {
           window.addEventListener("load", function () {
             WebApp.INITIATE();
           });`.trim()}
-          </Script>
+        </Script>
         </body>
       </Html>
     );

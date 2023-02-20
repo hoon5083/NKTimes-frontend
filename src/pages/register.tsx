@@ -7,7 +7,7 @@ import { serverAxios } from "../utils/commonAxios";
 const Register: NextPage = () => {
   const [isStudent, setIsStudent] = useState(false);
   const [isGraduate, setIsGraduate] = useState(false);
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
 
   const handleAuthority = (e: BaseSyntheticEvent) => {
@@ -80,7 +80,8 @@ const Register: NextPage = () => {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target?.files?[0]);
+    const newFile = e?.target?.files && e?.target?.files[0];
+    setFile(newFile);
   };
 
   return (

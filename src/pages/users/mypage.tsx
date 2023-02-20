@@ -10,7 +10,6 @@ import Image from "next/image";
 const Mypage: NextPage = () => {
   const { data, mutate } = useSWR<User>(`/users/me`, authFetcher);
   const [isEditing, setIsEditing] = useState(false);
-  console.log(data?.fileKey);
 
   const handleUser = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

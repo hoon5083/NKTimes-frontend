@@ -34,7 +34,6 @@ const Register: NextPage = () => {
 
     async function submitGroup() {
       const form = e.currentTarget;
-      console.log(file);
       const formElements = form
         ? (form.elements as typeof form.elements & {
           nickname: HTMLInputElement;

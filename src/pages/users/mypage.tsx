@@ -84,7 +84,7 @@ const Mypage: NextPage = () => {
               {data?.fileKey ?
                 <Image className="rounded-3xl" src={`${process.env.NEXT_PUBLIC_ENDPOINT}/files/${data?.fileKey}`}
                        alt="프로필 이미지"
-                       width={200} height={200} /> : null}
+                       width={200} height={200} unoptimized={true} /> : null}
             </div>
             <button
               className="px-4 py-1 mt-10 self-start text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"

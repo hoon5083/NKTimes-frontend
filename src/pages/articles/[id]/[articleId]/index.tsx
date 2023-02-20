@@ -91,7 +91,7 @@ const ArticleDetail: NextPage = () => {
               <Image className="rounded-2xl"
                      src={`${process.env.NEXT_PUBLIC_ENDPOINT}/files/${data?.author.fileKey}`}
                      alt="작성자 프로필사진" width={100}
-                     height={100} />
+                     height={100} unoptimized={true} />
               : null}
           </div>
           <div className="flex justify-between w-11/12 mx-auto justify-self-center">

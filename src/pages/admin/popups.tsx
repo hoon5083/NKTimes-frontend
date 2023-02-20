@@ -30,7 +30,7 @@ function AdminPopups() {
         <Image src={`${process.env.NEXT_PUBLIC_ENDPOINT}/files/${data?.photoKey}`}
                width={200}
                height={200}
-               alt="현재 팝업 이미지" />
+               alt="현재 팝업 이미지" unoptimized={true} />
       </div>
       <form>
         <div>

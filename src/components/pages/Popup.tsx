@@ -26,7 +26,8 @@ function Popup({ isOpen, onClose, handleDontShowAgain }: Props) {
             <Image src={`${process.env.NEXT_PUBLIC_ENDPOINT}/files/${data?.photoKey}`}
                    width={400}
                    height={400}
-                   alt="현재 팝업 이미지" />
+                   alt="현재 팝업 이미지"
+                   unoptimized={true} />
             <div className="flex gap-2">
               <button
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"

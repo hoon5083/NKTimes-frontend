@@ -14,6 +14,7 @@ import CommentSection from "../../../../components/pages/articles/commentSection
 import { authFetcher } from "../../../../utils/fetcher";
 import { useState } from "react";
 import ArticleModifySection from "../../../../components/pages/articles/articleModifySection";
+import Image from "next/image";
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter();
@@ -84,6 +85,14 @@ const ArticleDetail: NextPage = () => {
                 }}
               />
             )}
+          </div>
+          <div className="w-full flex justify-end mb-10 pr-10">
+            {data?.author.fileKey ?
+              <Image className="rounded-2xl"
+                     src={`${process.env.NEXT_PUBLIC_ENDPOINT}/files/${data?.author.fileKey}`}
+                     alt="작성자 프로필사진" width={100}
+                     height={100} />
+              : null}
           </div>
           <div className="flex justify-between w-11/12 mx-auto justify-self-center">
             <div className="flex gap-2">

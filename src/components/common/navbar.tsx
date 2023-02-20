@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useGoogleAuth from "../../hooks/useGoogleAuth";
 import useSWR from "swr";
 import { authFetcher } from "../../utils/fetcher";
@@ -6,7 +5,6 @@ import { User } from "../../types/api";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
-import BoardDropdown from "./boardDropdown";
 import Image from "next/image";
 
 function Navbar() {
@@ -15,7 +13,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="flex justify-between h-12 mb-5 bg-cp-1">
+      <div className="flex justify-between h-12 mb-5 bg-white">
         <div className="flex">
           <Link href="/">
             <a className="flex px-2 m-2 cursor-pointer">
@@ -57,4 +55,5 @@ function Navbar() {
     </>
   );
 }
+
 export default Navbar;

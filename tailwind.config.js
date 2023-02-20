@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: [
@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'cp': {
-          1: "#FBFBF2",
+        "cp": {
+          1: "#FFFFFF",
           2: "#E5E6E4",
           3: "#F1F2F6",
           4: "#34CB78",

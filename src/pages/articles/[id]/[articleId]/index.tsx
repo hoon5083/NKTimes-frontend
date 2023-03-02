@@ -85,6 +85,7 @@ const ArticleDetail: NextPage = () => {
                 }}
               />
             )}
+
           </div>
           <div className="w-full flex justify-end mb-10 pr-10">
             {data?.author.fileKey ?
@@ -94,6 +95,12 @@ const ArticleDetail: NextPage = () => {
                      height={100} unoptimized={true} />
               : null}
           </div>
+          {data?.fileKeys[0] ? <div className="mx-4 flex flex-col my-2">
+            <div className="w-full text-lg">첨부 파일 보기</div>
+            {data?.fileKeys.map((fileKey, index) => <a key={fileKey} className="w-fit font-light hover:font-bold"
+                                                       href={`${process.env.NEXT_PUBLIC_ENDPOINT}/files/${fileKey}`}
+                                                       download>첨부파일 {index + 1}</a>)}
+          </div> : null}
           <div className="flex justify-between w-11/12 mx-auto justify-self-center">
             <div className="flex gap-2">
               {(user?.id === data?.author?.id || user?.authority === "관리자") &&

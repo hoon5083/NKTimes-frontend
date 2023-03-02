@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { FormEvent, HTMLAttributes, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import useGoogleAuth from "../../../hooks/useGoogleAuth";
-import { ArticleDetails } from "../../../types/api";
 import { getAuthHeader } from "../../../utils/auth";
 import { serverAxios } from "../../../utils/commonAxios";
+
 const Editor = dynamic(() => import("../../../components/pages/articles/editor"), {
   ssr: false,
 });
@@ -12,34 +12,46 @@ const Editor = dynamic(() => import("../../../components/pages/articles/editor")
 function ArticleInputSection() {
   const { loggedIn } = useGoogleAuth();
   const router = useRouter();
-  const [htmlStr, setHtmlStr] = React.useState<string>("");
+  const [htmlStr, setHtmlStr] = useState<string>("");
+  const [files, setFiles] = useState<File[]>([]);
 
   const handleArticle = useCallback(
     (e: any) => {
       e.preventDefault();
+
       async function submitGroup() {
         const form = e.currentTarget;
         const formElements = form
           ? (form.elements as typeof form.elements & {
-              title: HTMLInputElement;
-              file: HTMLInputElement;
-            })
+            title: HTMLInputElement;
+            file: HTMLInputElement;
+          })
           : null;
         console.log(formElements.files);
         if (htmlStr === "") {
           alert("빈 글 입니다.");
           return;
         }
-        if (loggedIn === false) {
+        if (!loggedIn) {
           alert("로그인이 필요합니다.");
           router.replace("/");
           return;
         }
         const config = getAuthHeader(document.cookie);
+        const fileKeys = await Promise.all(files.map(async (file) => {
+          const formData = new FormData();
+          if (file) {
+            formData.append("file", file);
+          }
+          const res = await serverAxios.post("/files", formData, config);
+          return res.data.key;
+        }));
+        console.log(fileKeys);
         try {
           const body = {
             content: htmlStr,
             title: formElements?.title.value,
+            fileKeys: fileKeys,
           };
           const res = await serverAxios.post(`/articles/${router.query.id}`, body, config);
           router.replace(`/articles/${router.query.id}/${res.data.id}`);
@@ -47,10 +59,25 @@ function ArticleInputSection() {
           console.log(e);
         }
       }
+
       submitGroup();
     },
-    [loggedIn, router, htmlStr]
+    [loggedIn, router, htmlStr, files],
   );
+
+  const addFile = (newFile: File) => {
+    const newList = [...files];
+    newList.push(newFile);
+    setFiles(newList);
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newFile = e?.target?.files && e?.target?.files[0];
+    if (newFile) {
+      addFile(newFile);
+    }
+  };
+
   return (
     <div>
       <div className="text-lg">제목:</div>
@@ -63,7 +90,9 @@ function ArticleInputSection() {
         <div className="text-sm font-light text-gray">
           100mb이하의 pdf, doc, docx 파일만 첨부 가능합니다.
         </div>
-        <input type="file" id="file" />
+        <input type="file" id="file" onChange={handleChange} />
+        <div className="bg-cp-1 w-full h-fit rounded-lg flex flex-col">{files.map((file) => (
+          <div key={file.name}>{file.name}</div>))}</div>
         <button
           className="px-2 py-1 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"
           type="submit"

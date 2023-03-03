@@ -46,7 +46,6 @@ function ArticleInputSection() {
           const res = await serverAxios.post("/files", formData, config);
           return res.data.key;
         }));
-        console.log(fileKeys);
         try {
           const body = {
             content: htmlStr,
@@ -67,8 +66,9 @@ function ArticleInputSection() {
 
   const addFile = (newFile: File) => {
     const newList = [...files];
-    newList.push(newFile);
-    setFiles(newList);
+    const filtered = newList.filter((file) => file.name !== newFile.name);
+    filtered.push(newFile);
+    setFiles(filtered);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +76,11 @@ function ArticleInputSection() {
     if (newFile) {
       addFile(newFile);
     }
+  };
+
+  const deleteFile = (targetFileName: string) => {
+    const newList = [...files];
+    setFiles(newList.filter((file) => file.name !== targetFileName));
   };
 
   return (
@@ -91,8 +96,10 @@ function ArticleInputSection() {
           100mb이하의 pdf, doc, docx 파일만 첨부 가능합니다.
         </div>
         <input type="file" id="file" onChange={handleChange} />
-        <div className="bg-cp-1 w-full h-fit rounded-lg flex flex-col">{files.map((file) => (
-          <div key={file.name}>{file.name}</div>))}</div>
+        <div className="bg-cp-1 w-full h-fit rounded-lg flex flex-col justify-start">{files.map((file) => (
+          <div key={file.name} className="w-fit hover:font-bold hover:cursor-pointer" onClick={() => {
+            deleteFile(file.name);
+          }}>x {file.name}</div>))}</div>
         <button
           className="px-2 py-1 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"
           type="submit"

@@ -25,6 +25,7 @@ const ArticleDetail: NextPage = () => {
   const { data, mutate } = useSWR<ArticleDetails>(`/articles/${id}/${articleId}`, authFetcher);
   const { loggedIn } = useGoogleAuth();
 
+
   const createLike = async () => {
     const config = getAuthHeader(document.cookie);
     await serverAxios.post(`/articles/${id}/${articleId}/like`, {}, config);

@@ -89,11 +89,11 @@ function ArticleInputSection() {
       <form onSubmit={handleArticle} className="flex flex-col gap-2">
         <input className="w-full h-10 p-2 rounded-lg" id="title" />
         <div className="text-sm font-light text-gray">
-          100mb이하의 png, jpg, jpeg, bmp 이미지만 삽입 가능합니다.
+          100mb이하의 png, jpg, jpeg 이미지만 삽입 가능합니다.
         </div>
         <Editor htmlStr={htmlStr} setHtmlStr={setHtmlStr} />
         <div className="text-sm font-light text-gray">
-          100mb이하의 pdf, doc, docx 파일만 첨부 가능합니다.
+          100mb이하의 pdf, doc, docx, png, jpg, jpeg 파일만 첨부 가능합니다.
         </div>
         <input type="file" id="file" onChange={handleChange} />
         <div className="bg-cp-1 w-full h-fit rounded-lg flex flex-col justify-start">{files.map((file) => (

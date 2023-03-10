@@ -59,20 +59,51 @@ function UserCard({ isDeleting, isEditing, user, setDeletingNum, setEditingNum, 
 
   return (<div className="p-2 my-2 rounded-lg bg-cp-1">
     {isEditing ? (
-      <div>
+      <form onSubmit={handleSubmit} id="auth-update">
         <div>별명: {user.nickname}</div>
-        <div>권한: {user.authority}</div>
-        {user.authority === "재학생" ? (
+        <div>
+          권한:{" "}
+          <select name="authority" defaultValue={user.authority}>
+            <option value="교사">교사</option>
+            <option value="재학생">재학생</option>
+            <option value="졸업생">졸업생</option>
+            <option value="학생회">학생회</option>
+            <option value="방송반">방송반</option>
+            <option value="신문반">신문반</option>
+          </select>
+        </div>
+
+        {user.authority === "재학생" &&
           <div>
             <div>{user.grade}학년</div>
             <div>{user.class}반</div>
             <div>{user.studentId}번</div>
           </div>
-        ) : null}
+        }
         <div>실명: {user.name}</div>
         <div>전화번호: {user.phone}</div>
         <div>email: {user.email}</div>
-        {!user.isApproved ? (
+        <button
+          type="submit"
+          className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
+        >
+          저장
+        </button>
+      </form>
+    ) : (<div>
+        <div>별명: {user.nickname}</div>
+        <div>권한: {user.authority}</div>
+        {user.authority === "재학생" &&
+          <div>
+            <div>{user.grade}학년</div>
+            <div>{user.class}반</div>
+            <div>{user.studentId}번</div>
+          </div>
+        }
+        <div>실명: {user.name}</div>
+        <div>전화번호: {user.phone}</div>
+        <div>email: {user.email}</div>
+        {!user.isApproved &&
           <button
             onClick={() => {
               approveUser(user.id);
@@ -80,8 +111,7 @@ function UserCard({ isDeleting, isEditing, user, setDeletingNum, setEditingNum, 
             className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
           >
             승인
-          </button>
-        ) : null}
+          </button>}
         {isDeleting ? (
           <button
             onClick={() => {
@@ -101,47 +131,14 @@ function UserCard({ isDeleting, isEditing, user, setDeletingNum, setEditingNum, 
             삭제
           </button>
         )}
-        {isEditing ? null : (
-          <button
-            onClick={() => setEditingNum(user.id)}
-            className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
-          >
-            변경
-          </button>
-        )}
-      </div>
-    ) : (
-      <form onSubmit={handleSubmit} id="auth-update">
-        <div>별명: {user.nickname}</div>
-        <div>
-          권한:{" "}
-          <select name="authority" defaultValue={user.authority}>
-            <option value="교사">교사</option>
-            <option value="재학생">재학생</option>
-            <option value="졸업생">졸업생</option>
-            <option value="학생회">학생회</option>
-            <option value="방송반">방송반</option>
-            <option value="신문반">신문반</option>
-          </select>
-        </div>
-
-        {user.authority === "재학생" ? (
-          <div>
-            <div>{user.grade}학년</div>
-            <div>{user.class}반</div>
-            <div>{user.studentId}번</div>
-          </div>
-        ) : null}
-        <div>실명: {user.name}</div>
-        <div>전화번호: {user.phone}</div>
-        <div>email: {user.email}</div>
-        <button
-          type="submit"
+        {!isEditing && <button
+          onClick={() => setEditingNum(user.id)}
           className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
         >
-          저장
-        </button>
-      </form>
+          변경
+        </button>}
+      </div>
+
     )}
   </div>);
 }

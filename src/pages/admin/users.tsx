@@ -117,9 +117,9 @@ const AdminUsers: NextPage = () => {
           <option value={10}>10반</option>
         </select>
       </form>
-      {data?.content.map((user, index: number) => {
+      {data?.content.map((user) => {
         return (
-          <div key={index} className="p-2 my-2 rounded-lg bg-cp-1">
+          <div key={user.id} className="p-2 my-2 rounded-lg bg-cp-1">
             {editingNum !== user.id ? (
               <div>
                 <div>별명: {user.nickname}</div>
@@ -144,7 +144,7 @@ const AdminUsers: NextPage = () => {
                     승인
                   </button>
                 ) : null}
-                {deletingNum === index ? (
+                {deletingNum === user.id ? (
                   <button
                     onClick={() => {
                       deleteUser(user.id);
@@ -156,7 +156,7 @@ const AdminUsers: NextPage = () => {
                 ) : (
                   <button
                     onClick={() => {
-                      setDeletingNum(index);
+                      setDeletingNum(user.id);
                     }}
                     className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
                   >

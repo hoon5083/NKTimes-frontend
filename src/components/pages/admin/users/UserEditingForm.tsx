@@ -5,11 +5,11 @@ import { serverAxios } from "../../../../utils/commonAxios";
 
 interface Props {
   user: User;
-  setEditingNum: (id: number) => void;
+  setIsEditing: (value: boolean) => void;
   mutate: () => void;
 }
 
-function UserEditingForm({ user, setEditingNum, mutate }: Props) {
+function UserEditingForm({ user, setIsEditing, mutate }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -26,7 +26,7 @@ function UserEditingForm({ user, setEditingNum, mutate }: Props) {
           authority: formElements?.authority.value,
         };
         await serverAxios.patch(`/users/${user.id}`, body, config);
-        setEditingNum(-1);
+        setIsEditing(false);
         mutate();
       } catch (e) {
         const error = e as any;

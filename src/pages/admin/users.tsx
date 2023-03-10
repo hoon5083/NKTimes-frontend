@@ -11,8 +11,6 @@ const AdminUsers: NextPage = () => {
   const [authority, setAuthority] = useState("all");
   const [grade, setGrade] = useState(0);
   const [_class, setClass] = useState(0);
-  const [deletingNum, setDeletingNum] = useState(-1);
-  const [editingNum, setEditingNum] = useState(-1);
   const key = `/users?pageNumber=${pageIndex}&pageSize=20` + (type === "pending" ? "&isPending=true" : "") + (authority !== "all" ? `&authority=${authority}` : "") + (grade !== 0 ? `&grade=${grade}` : "") + (_class !== 0 ? `&class=${_class}` : "");
 
   const { data, mutate } = useSWR<PagedApiResponse<User>>(
@@ -52,7 +50,7 @@ const AdminUsers: NextPage = () => {
           <option value="방송반">방송반</option>
           <option value="재학생">재학생</option>
         </select>
-        <select onChange={handleGrade} className="p-1 px-2 rounded-lg">
+        <select onChange={handleGrade} className="p-1 px-2 결rounded-lg">
           <option value={0}>학년</option>
           <option value={1}>1학년</option>
           <option value={2}>2학년</option>
@@ -74,9 +72,7 @@ const AdminUsers: NextPage = () => {
       </form>
       {data?.content.map((user) => {
         return (
-          <UserCard key={user.id} isDeleting={deletingNum === user.id} isEditing={editingNum === user.id} user={user}
-                    mutate={mutate}
-                    setDeletingNum={setDeletingNum} setEditingNum={setEditingNum} />
+          <UserCard key={user.id} user={user} mutate={mutate} />
         );
       })}
       <div className="flex justify-center gap-6">

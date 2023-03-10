@@ -1,17 +1,17 @@
 import { User } from "../../../../types/api";
 import { getAuthHeader } from "../../../../utils/auth";
 import { serverAxios } from "../../../../utils/commonAxios";
+import { useState } from "react";
 
 interface Props {
   user: User;
-  isDeleting: boolean;
   isEditing: boolean;
   mutate: () => void;
-  setDeletingNum: (id: number) => void;
-  setEditingNum: (id: number) => void;
+  setIsEditing: (value: boolean) => void;
 }
 
-function UserInfo({ user, isDeleting, isEditing, mutate, setDeletingNum, setEditingNum }: Props) {
+function UserInfo({ user, isEditing, mutate, setIsEditing }: Props) {
+  const [isDeleting, setIsDeleting] = useState(false);
   const approveUser = (id: number) => {
     const config = getAuthHeader(document.cookie);
     serverAxios.patch(`/users/${id}`, { isApproved: true }, config);
@@ -22,7 +22,7 @@ function UserInfo({ user, isDeleting, isEditing, mutate, setDeletingNum, setEdit
   const deleteUser = (id: number) => {
     const config = getAuthHeader(document.cookie);
     serverAxios.delete(`/users/${id}`, config);
-    setDeletingNum(-1);
+    setIsDeleting(false);
     location.reload();
     mutate();
   };
@@ -61,7 +61,7 @@ function UserInfo({ user, isDeleting, isEditing, mutate, setDeletingNum, setEdit
     ) : (
       <button
         onClick={() => {
-          setDeletingNum(user.id);
+          setIsDeleting(true);
         }}
         className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
       >
@@ -69,7 +69,7 @@ function UserInfo({ user, isDeleting, isEditing, mutate, setDeletingNum, setEdit
       </button>
     )}
     {!isEditing && <button
-      onClick={() => setEditingNum(user.id)}
+      onClick={() => setIsEditing(true)}
       className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
     >
       변경

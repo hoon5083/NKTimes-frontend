@@ -62,7 +62,7 @@ export interface Article {
 export interface ArticleDetails extends Article {
   isLiked: boolean;
   content: string;
-  fileKeys: string[];
+  files: FileBrief[];
 }
 
 export interface Board {
@@ -94,6 +94,11 @@ export interface File {
   articleId: number | undefined;
   popupId: number | undefined;
 
+}
+
+export interface FileBrief {
+  name: string;
+  key: string;
 }
 
 export interface Comment {

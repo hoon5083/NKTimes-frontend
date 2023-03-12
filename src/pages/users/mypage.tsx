@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import useSWR from "swr";
 import { User } from "../../types/api";
 import { getAuthHeader } from "../../utils/auth";
@@ -10,6 +10,8 @@ import Image from "next/image";
 const Mypage: NextPage = () => {
   const { data, mutate } = useSWR<User>(`/users/me`, authFetcher);
   const [isEditing, setIsEditing] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+
 
   const handleUser = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,10 +25,18 @@ const Mypage: NextPage = () => {
         })
         : null;
       const config = getAuthHeader(document.cookie);
+      const formData = new FormData();
+      let res;
+      if (file) {
+        formData.append("file", file);
+        res = await serverAxios.post("/files", formData, config);
+      }
+
       try {
         const body = {
           nickname: formElements?.nickname.value,
           phone: formElements?.pNumber.value,
+          fileKey: res?.data.key,
         };
         await serverAxios.patch(`/users/me`, body, config);
         mutate();
@@ -40,6 +50,13 @@ const Mypage: NextPage = () => {
 
     submitGroup();
   };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newFile = e?.target?.files && e?.target?.files[0];
+    setFile(newFile);
+  };
+
+
   return (
     <div className="min-h-[70vh] flex flex-col items-center gap-8">
       <div className="mb-20 text-4xl font-bold">마이 페이지</div>
@@ -115,6 +132,8 @@ const Mypage: NextPage = () => {
                   defaultValue={data?.phone}
                 />
               </div>
+              <div className="font-bold mt-5">프로필 사진 변경</div>
+              <input type="file" onChange={handleChange} />
               <button
                 className="px-4 py-1 mt-10 text-white rounded-lg w-fit bg-cp-5 hover:shadow-xl"
                 type="submit"

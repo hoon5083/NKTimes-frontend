@@ -28,6 +28,7 @@ const Home: NextPage = () => {
   const closePopup = () => {
     setPopupOpen(false);
   };
+
   return (
     <div>
       <Popup isOpen={popupOpen} onClose={closePopup} handleDontShowAgain={handleDontShowAgain} />

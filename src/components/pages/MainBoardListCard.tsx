@@ -31,7 +31,7 @@ function MainBoardListCard() {
           <div className="hover:font-bold cursor-pointer">후배사랑장학회</div>
         </Link>
         <Link href="articles/10">
-          <div className="hover:font-bold cursor-pointer">신문부</div>
+          <div className="hover:font-bold cursor-pointer">신문반</div>
         </Link>
         <Link href="articles/11">
           <div className="hover:font-bold cursor-pointer">방송반</div>

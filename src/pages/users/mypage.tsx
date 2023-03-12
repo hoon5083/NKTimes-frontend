@@ -28,7 +28,7 @@ const Mypage: NextPage = () => {
           nickname: formElements?.nickname.value,
           phone: formElements?.pNumber.value,
         };
-        const res = await serverAxios.patch(`/users/me`, body, config);
+        await serverAxios.patch(`/users/me`, body, config);
         mutate();
         setIsEditing(false);
       } catch (e) {
@@ -56,7 +56,7 @@ const Mypage: NextPage = () => {
                 </div>
                 {data?.authority === "재학생" ||
                 data?.authority === "학생회" ||
-                data?.authority === "신문부" ||
+                data?.authority === "신문반" ||
                 data?.authority === "방송반" ? (<>
                     <div className="table-row text-right">
                       학생정보

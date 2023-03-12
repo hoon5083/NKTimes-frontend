@@ -13,7 +13,7 @@ export interface Success {
 export interface User {
   id: number;
   nickname: string;
-  authority: "관리자" | "졸업생" | "교사" | "학생회" | "신문부" | "방송반" | "재학생";
+  authority: "관리자" | "졸업생" | "교사" | "학생회" | "신문반" | "방송반" | "재학생";
   email: string;
   grade: number | null;
   class: number | null;
@@ -38,7 +38,7 @@ export interface PopupDetails {
 export interface Author {
   id: number;
   nickname: string;
-  authority: "관리자" | "졸업생" | "교사" | "학생회" | "신문부" | "방송반" | "재학생";
+  authority: "관리자" | "졸업생" | "교사" | "학생회" | "신문반" | "방송반" | "재학생";
   grade: null | number;
   class: null | number;
   fileKey: string;

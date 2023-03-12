@@ -30,12 +30,18 @@ function UserInfo({ user, isEditing, mutate, setIsEditing }: Props) {
   return (<div>
     <div>별명: {user.nickname}</div>
     <div>권한: {user.authority}</div>
-    {user.authority === "재학생" &&
-      <div>
+    {user.authority === "재학생" || user.authority === "신문반" || user.authority === "방송반" || user.authority === "학생회" ?
+      <div className="flex gap-2">
         <div>{user.grade}학년</div>
         <div>{user.class}반</div>
         <div>{user.studentId}번</div>
-      </div>
+      </div> : null
+    }
+    {user.authority === "졸업생" ?
+      <div>졸업년도: {user.graduateYear}년</div> : null
+    }
+    {user.authority === "재학생" || user.authority === "신문반" || user.authority === "방송반" || user.authority === "학생회" || user.authority === "졸업생" ?
+      <div>출신중학교: {user.middleSchool}</div> : null
     }
     <div>실명: {user.name}</div>
     <div>전화번호: {user.phone}</div>
@@ -72,7 +78,7 @@ function UserInfo({ user, isEditing, mutate, setIsEditing }: Props) {
       onClick={() => setIsEditing(true)}
       className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
     >
-      변경
+      수정
     </button>}
   </div>);
 }

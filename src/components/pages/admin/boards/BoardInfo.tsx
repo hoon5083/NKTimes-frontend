@@ -7,9 +7,10 @@ interface Props {
   mutate: () => void;
   board: BoardDetails;
   type: string;
+  setIsEditing: (value: boolean) => void;
 }
 
-function BoardInfo({ mutate, board, type }: Props) {
+function BoardInfo({ mutate, board, type, setIsEditing }: Props) {
   const [isDeleting, setIsDeleting] = useState(false);
   const approveBoard = (id: number) => {
     const config = getAuthHeader(document.cookie);
@@ -27,7 +28,7 @@ function BoardInfo({ mutate, board, type }: Props) {
   };
 
   return <div className="p-2 my-2 rounded-lg bg-cp-1">
-    <div className="mb-2">이름: {board.title}</div>
+    <div>이름: {board.title}</div>
     <div>소개: {board.introduction}</div>
     {type !== "approved" ? (
       <div>
@@ -47,6 +48,15 @@ function BoardInfo({ mutate, board, type }: Props) {
         승인
       </button>
     ) : null}
+    <button
+      onClick={() => {
+        setIsEditing(true);
+      }}
+      type="submit"
+      className="p-1 px-2 mr-2 text-white rounded-lg bg-cp-5 hover:shadow-xl"
+    >
+      수정
+    </button>
     {isDeleting ? (
       <button
         onClick={() => {

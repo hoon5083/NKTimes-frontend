@@ -6,9 +6,10 @@ import { BoardDetails } from "../../../../types/api";
 interface Props {
   mutate: () => void;
   board: BoardDetails;
+  type: string;
 }
 
-function BoardInfo({ mutate, board }: Props) {
+function BoardInfo({ mutate, board, type }: Props) {
   const [isDeleting, setIsDeleting] = useState(false);
   const approveBoard = (id: number) => {
     const config = getAuthHeader(document.cookie);

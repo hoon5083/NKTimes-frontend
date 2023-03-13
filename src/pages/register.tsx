@@ -64,6 +64,7 @@ const Register: NextPage = () => {
           class: Number(formElements?.class?.value),
           studentId: Number(formElements?.number?.value),
           graduateYear: Number(formElements?.graduateYear?.value),
+          middleSchool: formElements?.middleSchool?.value,
           fileKey: res.data.key,
         };
         await serverAxios.post(`/users`, body, config);
